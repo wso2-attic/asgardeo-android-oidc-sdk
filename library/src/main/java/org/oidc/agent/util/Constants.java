@@ -26,10 +26,7 @@ public class Constants {
     public static final String BEARER = "Bearer ";
 
     // Constants related to Configuration.
-    public static final String PREFS_NAME = "config";
-    public static final String KEY_LAST_HASH = "lastHash";
-    public static final String DISCOVERY_ENDPOINT =
-            "/oauth2/oidcdiscovery/.well-known/openid-configuration";
+    public static final String DISCOVERY_ENDPOINT = "/oauth2/oidcdiscovery/.well-known/openid-configuration";
     public static final String DISCOVERY_URI = "discovery_uri";
     public static final String CLIENT_ID = "client_id";
     public static final String AUTHORIZATION_SCOPE = "authorization_scope";
@@ -47,4 +44,5 @@ public class Constants {
     // Constants related to OIDC logout request.
     public static final String ID_TOKEN_HINT = "id_token_hint";
     public static final String POST_LOGOUT_REDIRECT_URI = "post_logout_redirect_uri";
+
 }

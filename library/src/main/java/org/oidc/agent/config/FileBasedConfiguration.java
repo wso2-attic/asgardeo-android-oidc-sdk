@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.oidc.agent.util;
+package org.oidc.agent.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -39,38 +39,28 @@ import okio.BufferedSource;
 import okio.Okio;
 import org.oidc.agent.exception.ClientException;
 import org.oidc.agent.library.R;
+import org.oidc.agent.util.Constants;
 
 /**
  * Reads and validates the configuration from res/raw/oidc_config.json file.
  */
-public class ConfigManager {
+public class FileBasedConfiguration implements Configuration {
 
-    private static WeakReference<ConfigManager> sInstance = new WeakReference<>(null);
+    private static WeakReference<FileBasedConfiguration> sInstance = new WeakReference<>(null);
 
-    private final Context mContext;
     private final Resources mResources;
 
     private JSONObject mConfigJson;
     private String mClientId;
     private String mScope;
     private Uri mRedirectUri;
-    private Uri mDicoveryUri;
+    private Uri mDiscoveryUri;
 
+    private static final String LOG_TAG = "FileBasedConfiguration";
 
-    private static final String LOG_TAG = "ConfigManager";
-    static final String KEY_LAST_HASH = "lastHash";
+    private FileBasedConfiguration(Context context) throws ClientException {
 
-
-    private int mConfigHash;
-    private String mConfigurationError;
-    private final SharedPreferences prefs;
-
-
-    private ConfigManager(Context context) throws ClientException {
-
-        this.mContext = context;
-        mResources = context.getResources();
-        prefs = context.getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE);
+        this.mResources = context.getResources();
         readConfiguration(R.raw.oidc_config);
     }
 
@@ -80,11 +70,11 @@ public class ConfigManager {
      * @param context Context object with information about the current state of the application.
      * @return ConfigManager instance.
      */
-    public static ConfigManager getInstance(Context context) throws ClientException {
+    public static FileBasedConfiguration getInstance(Context context) throws ClientException {
 
-        ConfigManager config = sInstance.get();
+        FileBasedConfiguration config = sInstance.get();
         if (config == null) {
-            config = new ConfigManager(context);
+            config = new FileBasedConfiguration(context);
             sInstance = new WeakReference<>(config);
         }
 
@@ -133,7 +123,7 @@ public class ConfigManager {
     @NonNull
     public Uri getDiscoveryUri() {
 
-        return mDicoveryUri;
+        return mDiscoveryUri;
     }
 
     /**
@@ -157,7 +147,7 @@ public class ConfigManager {
         mClientId = getRequiredConfigString(Constants.CLIENT_ID);
         mScope = getRequiredConfigString(Constants.AUTHORIZATION_SCOPE);
         mRedirectUri = getRequiredUri(getRequiredConfigString(Constants.REDIRECT_URI));
-        mDicoveryUri = deriveDiscoveryUri(getRequiredConfigString(Constants.DISCOVERY_URI));
+        mDiscoveryUri = deriveDiscoveryUri(getRequiredConfigString(Constants.DISCOVERY_URI));
     }
 
     /**
@@ -186,7 +176,7 @@ public class ConfigManager {
     /**
      * Returns Config URI.
      *
-     * @param endpoint
+     * @param endpoint Endpoint
      * @return Uri
      */
     private Uri getRequiredUri(String endpoint) throws ClientException {
@@ -202,11 +192,11 @@ public class ConfigManager {
         }
 
         if (!TextUtils.isEmpty(uri.getEncodedQuery())) {
-            throw new ClientException(endpoint+ " must not have query parameters");
+            throw new ClientException(endpoint + " must not have query parameters");
         }
 
         if (!TextUtils.isEmpty(uri.getEncodedFragment())) {
-            throw new ClientException(endpoint+ " must not have a fragment");
+            throw new ClientException(endpoint + " must not have a fragment");
         }
         return uri;
     }
@@ -219,23 +209,14 @@ public class ConfigManager {
      */
     private Uri deriveDiscoveryUri(String issuerUri) throws ClientException {
 
-        if(issuerUri.contains(Constants.DISCOVERY_ENDPOINT)){
+        if (issuerUri.contains(Constants.DISCOVERY_ENDPOINT)) {
             Log.d(LOG_TAG, "Discovery endpoint is " + issuerUri);
             return getRequiredUri(issuerUri);
-        }else{
-            String derivedUri = issuerUri+ Constants.DISCOVERY_ENDPOINT;
+        } else {
+            String derivedUri = issuerUri + Constants.DISCOVERY_ENDPOINT;
             Log.d(LOG_TAG, "Discovery endpoint is " + derivedUri);
             return getRequiredUri(derivedUri);
         }
     }
 
-    public boolean hasConfigurationChanged() {
-        Integer lastKnownConfigHash = getLastKnownConfigHash();
-        return lastKnownConfigHash == null || mConfigHash != lastKnownConfigHash;
-    }
-
-    private Integer getLastKnownConfigHash() {
-        String hashString = prefs.getString(KEY_LAST_HASH, null);
-        return hashString == null ? null : Integer.valueOf(hashString);
-    }
 }

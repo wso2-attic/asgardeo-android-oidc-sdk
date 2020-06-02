@@ -18,20 +18,22 @@
 
 package org.oidc.agent.exception;
 
-import java.net.MalformedURLException;
-
+/**
+ * Handles exception from client side.
+ */
 public class ClientException extends Throwable {
 
     private String message;
 
     public ClientException(String msg) {
-
+        this.message = msg;
     }
 
     public ClientException(String msg, Exception e) {
+        this.message = msg;
     }
 
-    public String getMessage(){
-       return message;
+    public String getMessage() {
+        return message;
     }
 }

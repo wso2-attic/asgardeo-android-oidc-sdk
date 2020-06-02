@@ -16,23 +16,17 @@
  * under the License.
  */
 
-package org.oidc.agent.exception;
+package org.oidc.agent.config;
 
-/**
- * Handles the exception thrown from server side.
- */
-public class ServerException extends Throwable {
+import android.net.Uri;
 
-    private String message;
+public interface Configuration {
 
-    public ServerException(String msg) {
-        this.message = msg;
-    }
+    String getClientId();
 
-    public ServerException(String msg, Exception e) {
-    }
+    String getScope();
 
-    public String getMessage() {
-        return message;
-    }
+    Uri getRedirectUri();
+
+    Uri getDiscoveryUri();
 }

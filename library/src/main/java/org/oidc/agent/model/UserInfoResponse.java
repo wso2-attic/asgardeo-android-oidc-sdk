@@ -16,57 +16,63 @@
  * under the License.
  */
 
-package org.oidc.agent.sso;
+package org.oidc.agent.model;
 
 import android.util.Log;
+import androidx.annotation.NonNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.oidc.agent.util.Constants;
 
+import java.io.Serializable;
+
 /**
  * This class contains userinfo response.
  */
-public class UserInfoResponse {
+public class UserInfoResponse implements Serializable {
 
-    private JSONObject mUserInfoResponse;
-    static final String LOG_TAG = "UserInfoResponse";
+    private String mUserInfoResponse;
+    private static final String LOG_TAG = "UserInfoResponse";
 
     public UserInfoResponse(JSONObject userInfoResponse) {
 
-        mUserInfoResponse = userInfoResponse;
+        mUserInfoResponse = userInfoResponse.toString();
     }
 
     /**
      * Returns the subject value of the userinfo response.
+     *
      * @return subject.
      */
-    public String getSubject(){
+    public String getSubject() {
 
-        Log.i(LOG_TAG, "Call subject in userinfo service");
         return getUserInfoProperty(Constants.SUBJECT);
     }
 
     /**
      * Returns the claim values of additional claims returned in the userinfo response.
+     *
      * @param property Additional claim.
      * @return The claim value returned in the userinfo response.
      */
     public String getUserInfoProperty(String property) {
 
-        Log.i(LOG_TAG, "Call userinfo service to get property");
         String userInfoProperty = null;
         try {
-            userInfoProperty = (String) mUserInfoResponse.get(property);
+            JSONObject obj = new JSONObject(mUserInfoResponse);
+            userInfoProperty = (String) obj.get(property);
+            Log.d(LOG_TAG, "Get the value for the claim: " + property + " from userinfo response");
+
         } catch (JSONException e) {
 
         }
         return userInfoProperty;
     }
 
-    public JSONObject getUserInfoProperties() {
 
-        Log.i(LOG_TAG, "Call userinfo service to get all claims");
-        return mUserInfoResponse;
+    public JSONObject getUserInfoProperties() throws JSONException {
 
+        Log.d(LOG_TAG, "Get all claim information from userinfo response");
+        return new JSONObject(mUserInfoResponse);
     }
 }

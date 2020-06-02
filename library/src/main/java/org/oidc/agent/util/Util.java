@@ -29,13 +29,21 @@ import java.util.Map;
 
 public class Util {
 
+    /**
+     * Handles adding query parameters to URL.
+     *
+     * @param url         URL
+     * @param queryParams Map of query params.
+     * @return URL appended with query params.
+     * @throws UnsupportedEncodingException
+     */
     public static String buildURLWithQueryParams(String url, Map<String, String> queryParams)
             throws UnsupportedEncodingException {
 
         List<String> queryParam1 = new ArrayList<>();
         for (Map.Entry<String, String> entry : queryParams.entrySet()) {
-            String encodedValue = URLEncoder.encode(entry.getValue(),
-                    String.valueOf(Charset.forName("UTF-8")));
+            String encodedValue = URLEncoder
+                    .encode(entry.getValue(), String.valueOf(Charset.forName("UTF-8")));
             queryParam1.add(entry.getKey() + "=" + encodedValue);
         }
 
@@ -48,9 +56,9 @@ public class Util {
      */
     public static String appendQueryParamsStringToUrl(String url, String queryParamString) {
         String queryAppendedUrl = url;
-        // check whether param string to append is blank
+        // Check whether param string to append is blank.
         if (StringUtils.isNotEmpty(queryParamString)) {
-            // check whether the URL already contains query params
+            // Check whether the URL already contains query params.
             String appender;
             if (url.contains("?")) {
                 appender = "&";
@@ -58,14 +66,13 @@ public class Util {
                 appender = "?";
             }
 
-            // remove leading anchor or question mark in query params
+            // Remove leading anchor or question mark in query params.
             if (queryParamString.startsWith("?") || queryParamString.startsWith("&")) {
                 queryParamString = queryParamString.substring(1);
             }
 
             queryAppendedUrl += appender + queryParamString;
         }
-
         return queryAppendedUrl;
     }
 }

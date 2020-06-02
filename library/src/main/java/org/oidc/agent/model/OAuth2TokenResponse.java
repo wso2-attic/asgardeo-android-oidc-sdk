@@ -16,59 +16,61 @@
  * under the License.
  */
 
-package org.oidc.agent.sso;
+package org.oidc.agent.model;
+
+import android.os.Parcelable;
+
+import java.io.Serializable;
 
 /**
  * This class contains the TokenResponse.
  */
-public class OAuth2TokenResponse {
+public class OAuth2TokenResponse implements Serializable {
 
-    private String tokenType;
-    private String accessToken;
-    private Long accessTokenExpirationTime;
-    private String idToken;
-    private String refreshToken;
-
-    public OAuth2TokenResponse() {
-    }
+    private String mTokenType;
+    private String mAccessToken;
+    private Long mAccessTokenExpirationTime;
+    private String mIdToken;
+    private String mRefreshToken;
 
     public void setIdToken(String idToken) {
-        this.idToken = idToken;
+        this.mIdToken = idToken;
     }
 
     public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+        this.mAccessToken = accessToken;
     }
 
     public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+        this.mRefreshToken = refreshToken;
     }
 
     public void setAccessTokenExpirationTime(Long accessTokenExpirationTime) {
-        this.accessTokenExpirationTime = accessTokenExpirationTime;
+        this.mAccessTokenExpirationTime = accessTokenExpirationTime;
     }
 
     public void setTokenType(String tokenType) {
-        this.tokenType = tokenType;
+        this.mTokenType = tokenType;
     }
 
     public String getIdToken() {
-        return idToken;
+        return mIdToken;
     }
 
     public String getAccessToken() {
-        return accessToken;
+        return mAccessToken;
     }
 
     public String getTokenType() {
-        return tokenType;
+        return mTokenType;
     }
 
     public Long getAccessTokenExpirationTime() {
-        return accessTokenExpirationTime;
+        return mAccessTokenExpirationTime;
     }
 
     public String getRefreshToken() {
-        return refreshToken;
+        return mRefreshToken;
     }
+
 }
