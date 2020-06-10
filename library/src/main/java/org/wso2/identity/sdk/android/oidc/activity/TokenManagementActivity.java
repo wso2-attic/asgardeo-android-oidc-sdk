@@ -33,6 +33,9 @@ import net.openid.appauth.internal.Logger;
 import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
 import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
 
+/**
+ * This activity handles the token exchange flow.
+ */
 public class TokenManagementActivity extends Activity {
 
     static final String KEY_COMPLETE_INTENT = "completeIntent";

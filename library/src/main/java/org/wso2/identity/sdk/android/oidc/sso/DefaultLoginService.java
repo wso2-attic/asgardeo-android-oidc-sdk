@@ -48,7 +48,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * Provides authentication and logout support using Identity server.
+ * Provides default implementation for authentication and logout support using Identity server.
  */
 public class DefaultLoginService implements LoginService {
 
@@ -166,7 +166,6 @@ public class DefaultLoginService implements LoginService {
         } catch (UnsupportedEncodingException e) {
             Log.e(LOG_TAG, "Error while creating logout request", e);
         }
-
 
     }
 

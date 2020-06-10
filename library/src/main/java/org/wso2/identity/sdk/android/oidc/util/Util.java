@@ -27,6 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This is the util class contains some utility methods required by the library.
+ */
 public class Util {
 
     /**

@@ -18,6 +18,9 @@
 
 package org.wso2.identity.sdk.android.oidc.constant;
 
+/**
+ * This class contains the constants required by this library.
+ */
 public class Constants {
 
     // Constants related to HTTP connection

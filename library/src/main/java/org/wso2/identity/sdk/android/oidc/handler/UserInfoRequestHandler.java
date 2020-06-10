@@ -35,6 +35,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
+/**
+ * Handles the Userinfo request flow to Identity Server.
+ */
 public class UserInfoRequestHandler extends AsyncTask<Void, Void, UserInfoResponse> {
 
     private UserInfoResponseCallback mCallback;

@@ -23,6 +23,9 @@ import android.content.Context;
 import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
 import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
 
+/**
+ * Provides the interface for authentication and logout mechanism.
+ */
 public interface LoginService {
 
     /**
