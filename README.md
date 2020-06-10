@@ -8,7 +8,7 @@
 | --------------------- | ------------- | 
 | Service Provider Name | sample-app  |
 | Description           | This is a mobile application  | 
-| Call Back Url         | wso2sample://oauth  | 
+| Call Back Url         | wso2sample://oauth2  | 
 
 Enable following properties:
 - PKCE Mandatory
@@ -21,7 +21,7 @@ Enable following properties:
 
 #### Add the dependency 
 
-1. Clone this project: https://github.com/piraveena/android-sdk.git
+1. Clone this project: https://github.com/wso2-extensions/identity-sdks-android.git.
 
 2. Build the library in your local maven. Run the following commands. Now the library will be available in your local .m2 cache. 
     - `./gradlew clean assembleRelease`
@@ -31,7 +31,7 @@ Enable following properties:
 
 ```gradle
 dependencies {
-     implementation 'org.wso2.carbon.identity.sso:wso2is-oidc-sdk:0.0.1'
+     implementation 'org.wso2.identity.sdk.android.oidc:wso2is-oidc-sdk:0.0.1'
 }
 
 ```
@@ -88,7 +88,7 @@ As the first step, you need to initialize SDK in the Activity#onCreate method of
 In this example, we will call it LoginActivity:
 
 ```java
-    mLoginService = LoginService.getInstance(this);
+    LoginService mLoginService = new DefaultLoginService(this);
 ```
 
 
@@ -104,66 +104,61 @@ Have a login button inside LoginActivity. Call the `doAuthorization(Context cont
 ```
    
 ```java
-private void doAuthorization(Context context) {
+private void doAuthorization() {
    
-      mLoginService = LoginService.getInstance(this);
-
-      Intent completionIntent = new Intent(context, UserInfoActivity.class);
-      Intent cancelIntent = new Intent(context, LoginActivity.class);
+      mLoginService = new DefaultLoginService(this);
+      Intent completionIntent = new Intent(this, UserInfoActivity.class);
+      Intent cancelIntent = new Intent(this, LoginActivity.class);
       cancelIntent.putExtra("failed", true);
       cancelIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-      PendingIntent pendingCompletionIntent = PendingIntent.getActivity(context, 0,
-                     completionIntent, 0);
-      PendingIntent pendingCancelIntent = PendingIntent.getActivity(context, 0, cancelIntent, 0);
-    
-      mLoginService.doAuthorization(pendingCompletionIntent, pendingCancelIntent);
+      PendingIntent successIntent = PendingIntent.getActivity(this, 0, completionIntent, 0);
+      PendingIntent failureIntent = PendingIntent.getActivity(this, 0, cancelIntent, 0);
+
+      mLoginService.authorize(successIntent, failureIntent);
    }
 ```
    
 
 
-#### Get the accesstoken and idtoken.
+#### Get The token response.
 
-- You can add this `handleAuthorizationResponse(Intent intent)` method inside a Activity when there is a successfull
- authentication response comes from the IDP. 
+- After successful authorization, AuthenticationContext object will be returned in the Intent
+. From the `oncreate()` method of the UserInfo.Activity, get the authenticationcontext object. 
+
+- Authentication context object has oidcdiscovery response, tokenresponse, ans userinfo responses.
+
+- In all flows such as userinfo and logout request, you need to pass this context object.
  
 - In the authorization request, you need to create a Intent for successfull request and redirect to this activity.
 ```java
 @Override
-    protected void onStart() {  
-        super.onStart();
-        getConfigManager(this);
-        handleAuthorizationResponse(getIntent());
+    protected void create() {  
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_info);
+        mLoginService = new DefaultLoginService(this);
+        mAuthenticationContext = (AuthenticationContext) getIntent().getSerializableExtra("context");
     }
 ``` 
- 
-```java
-private void handleAuthorizationResponse(Intent intent) {
 
-      mLoginService.handleAuthorization(intent, new TokenRequest.TokenRespCallback() {
-          @Override
-          public void onTokenRequestCompleted(OAuth2TokenResponse oAuth2TokenResponse) {
-              mOAuth2TokenResponse = oAuth2TokenResponse;
-              getUserInfo();
-          }
-      });
-  }
-```
   
 ### Read UserInfo
 
 ```java
 private void getUserInfo(){
-    mLoginService.getUserInfo(new UserInfoRequest.UserInfoResponseCallback() {
-        @Override
-        public void onUserInfoRequestCompleted(UserInfoResponse userInfoResponse) {
-            mSubject = userInfoResponse.getSubject();
-            mEmail = userInfoResponse.getUserInfoProperty("email");
-            JSONObject userInfoProperties = userInfoResponse.getUserInfoProperties();
-            mIdToken = mOAuth2TokenResponse.idToken;
-            mAccessToken = mOAuth2TokenResponse.accessToken;
-        }
-    });
+   new UserInfoRequestHandler.UserInfoResponseCallback() {
+               @Override
+               public void onUserInfoRequestCompleted(UserInfoResponse userInfoResponse,
+                       ServerException e) {
+                   if (userInfoResponse != null) {
+                       mSubject = userInfoResponse.getSubject();
+                       mEmail = userInfoResponse.getUserInfoProperty("email");
+                       JSONObject userInfoProperties = userInfoResponse.getUserInfoProperties();
+                   }
+   
+                   if (mAuthenticationContext.getOAuth2TokenResponse() != null) {
+                       mIdToken = mAuthenticationContext.getOAuth2TokenResponse().getIdToken();
+                       mAccessToken = mAuthenticationContext.getOAuth2TokenResponse().getAccessToken();
+                   }
     }
 ```
 
@@ -172,17 +167,15 @@ private void getUserInfo(){
 - Call the logout method when logout button is clicked.
 
 ```java
-findViewById(R.id.logout).setOnClickListener(v ->
-                  singleLogout(this)
-          ); 
+findViewById(R.id.logout).setOnClickListener(v -> Logout());
 
 ```
 - Call the logout method of LoginService instance.
 
 ```java
-private void singleLogout(Context context) {
+private void Logout() {
 
-        mLoginService.logout(context);
+        mLoginService.logout(this, mAuthenticationContext);
         finish();
     }
 ```
