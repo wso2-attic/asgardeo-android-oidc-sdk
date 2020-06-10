@@ -16,9 +16,7 @@
  * under the License.
  */
 
-package org.oidc.agent.model;
-
-import android.os.Parcelable;
+package org.wso2.identity.sdk.android.oidc.model;
 
 import java.io.Serializable;
 
@@ -27,50 +25,101 @@ import java.io.Serializable;
  */
 public class OAuth2TokenResponse implements Serializable {
 
+    private static final long serialVersionUID = 8967247348511678909L;
+
     private String mTokenType;
     private String mAccessToken;
     private Long mAccessTokenExpirationTime;
     private String mIdToken;
     private String mRefreshToken;
 
+    /**
+     * Set idToken.
+     *
+     * @param idToken idToken.
+     */
     public void setIdToken(String idToken) {
         this.mIdToken = idToken;
     }
 
+    /**
+     * Set accessToken.
+     *
+     * @param accessToken accesstoken.
+     */
     public void setAccessToken(String accessToken) {
         this.mAccessToken = accessToken;
     }
 
+    /**
+     * Set refresh token.
+     *
+     * @param refreshToken refreshToken.
+     */
     public void setRefreshToken(String refreshToken) {
         this.mRefreshToken = refreshToken;
     }
 
+    /**
+     * Set accessToken expiration time.
+     *
+     * @param accessTokenExpirationTime accessToken expiration time.
+     */
     public void setAccessTokenExpirationTime(Long accessTokenExpirationTime) {
         this.mAccessTokenExpirationTime = accessTokenExpirationTime;
     }
 
+    /**
+     * Set token type.
+     *
+     * @param tokenType tokenType.
+     */
     public void setTokenType(String tokenType) {
         this.mTokenType = tokenType;
     }
 
+    /**
+     * Returns idToken.
+     *
+     * @return idToken.
+     */
     public String getIdToken() {
         return mIdToken;
     }
 
+    /**
+     * Returns accessToken.
+     *
+     * @return accessToken.
+     */
     public String getAccessToken() {
         return mAccessToken;
     }
 
+    /**
+     * Returns tokenType.
+     *
+     * @return tokenType.
+     */
     public String getTokenType() {
         return mTokenType;
     }
 
+    /**
+     * Returns Access Token Expiration Time.
+     *
+     * @return AccessTokenExpirationTime.
+     */
     public Long getAccessTokenExpirationTime() {
         return mAccessTokenExpirationTime;
     }
 
+    /**
+     * Returns refresh token.
+     *
+     * @return refreshToken.
+     */
     public String getRefreshToken() {
         return mRefreshToken;
     }
-
 }

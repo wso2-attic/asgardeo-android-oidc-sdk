@@ -16,18 +16,18 @@
  * under the License.
  */
 
-package org.oidc.agent.handler;
+package org.wso2.identity.sdk.android.oidc.handler;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import okio.Okio;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.oidc.agent.context.AuthenticationContext;
-import org.oidc.agent.exception.ClientException;
-import org.oidc.agent.exception.ServerException;
-import org.oidc.agent.model.UserInfoResponse;
-import org.oidc.agent.util.Constants;
+import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
+import org.wso2.identity.sdk.android.oidc.exception.ClientException;
+import org.wso2.identity.sdk.android.oidc.exception.ServerException;
+import org.wso2.identity.sdk.android.oidc.model.UserInfoResponse;
+import org.wso2.identity.sdk.android.oidc.constant.Constants;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -56,7 +56,7 @@ public class UserInfoRequestHandler extends AsyncTask<Void, Void, UserInfoRespon
     protected UserInfoResponse doInBackground(Void... voids) {
 
         if (mAuthenticationContext.getOAuth2TokenResponse() != null
-                && mAuthenticationContext.getUserInfoResponse() !=null ) {
+                && mAuthenticationContext.getUserInfoResponse() != null) {
             Log.d(LOG_TAG, "There is already a userinfo response is stored");
             mUserInfoResponse = mAuthenticationContext.getUserInfoResponse();
 
@@ -66,9 +66,11 @@ public class UserInfoRequestHandler extends AsyncTask<Void, Void, UserInfoRespon
                     throw new ClientException(
                             "DiscoveryResponse is null. Reinitiate the " + "authentication");
                 }
-                String accessToken = mAuthenticationContext.getOAuth2TokenResponse().getAccessToken();
-                URL userInfoEndpoint = new URL(mAuthenticationContext.getOIDCDiscoveryResponse()
-                        .getUserInfoEndpoint().toString());
+                String accessToken = mAuthenticationContext.getOAuth2TokenResponse()
+                        .getAccessToken();
+                URL userInfoEndpoint = new URL(
+                        mAuthenticationContext.getOIDCDiscoveryResponse().getUserInfoEndpoint()
+                                .toString());
 
                 HttpURLConnection conn = (HttpURLConnection) userInfoEndpoint.openConnection();
                 conn.setRequestProperty(Constants.AUTHORIZATION, Constants.BEARER + accessToken);
@@ -80,7 +82,6 @@ public class UserInfoRequestHandler extends AsyncTask<Void, Void, UserInfoRespon
                 JSONObject json = new JSONObject(response);
                 mUserInfoResponse = new UserInfoResponse(json);
                 mAuthenticationContext.setUserInfoResponse(mUserInfoResponse);
-
 
             } catch (MalformedURLException e) {
                 String error = "Error while calling userinfo endpoint";
@@ -123,7 +124,6 @@ public class UserInfoRequestHandler extends AsyncTask<Void, Void, UserInfoRespon
          *
          * @param userInfoResponse UserInfoResponse
          */
-        public void onUserInfoRequestCompleted(UserInfoResponse userInfoResponse,
-                ServerException ex);
+        void onUserInfoRequestCompleted(UserInfoResponse userInfoResponse, ServerException ex);
     }
 }

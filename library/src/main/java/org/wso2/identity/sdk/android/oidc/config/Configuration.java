@@ -16,17 +16,40 @@
  * under the License.
  */
 
-package org.oidc.agent.config;
+package org.wso2.identity.sdk.android.oidc.config;
 
 import android.net.Uri;
 
+/**
+ * This interface is used to get configurations of an OIDC application.
+ */
 public interface Configuration {
 
+    /**
+     * Returns clientId.
+     *
+     * @return clientId.
+     */
     String getClientId();
 
+    /**
+     * Returns scope.
+     *
+     * @return scope.
+     */
     String getScope();
 
+    /**
+     * Returns redirect URI.
+     *
+     * @return redirectURI.
+     */
     Uri getRedirectUri();
 
+    /**
+     * Returns discovery URI.
+     *
+     * @return discoveryURI.
+     */
     Uri getDiscoveryUri();
 }

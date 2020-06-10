@@ -16,7 +16,8 @@
  * under the License.
  */
 
-package org.oidc.agent.util;
+//TODO: org.wso2.identity.sdk.android.oidc.
+package org.wso2.identity.sdk.android.oidc.constant;
 
 public class Constants {
 
@@ -44,5 +45,4 @@ public class Constants {
     // Constants related to OIDC logout request.
     public static final String ID_TOKEN_HINT = "id_token_hint";
     public static final String POST_LOGOUT_REDIRECT_URI = "post_logout_redirect_uri";
-
 }

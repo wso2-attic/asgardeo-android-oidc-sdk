@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.oidc.agent.handler;
+package org.wso2.identity.sdk.android.oidc.activity;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -30,8 +30,8 @@ import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.TokenResponse;
 import net.openid.appauth.internal.Logger;
-import org.oidc.agent.context.AuthenticationContext;
-import org.oidc.agent.model.OAuth2TokenResponse;
+import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
+import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
 
 public class TokenManagementActivity extends Activity {
 

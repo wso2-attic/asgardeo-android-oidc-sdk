@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.oidc.agent.util;
+package org.wso2.identity.sdk.android.oidc.util;
 
 import org.apache.commons.lang.StringUtils;
 

@@ -16,13 +16,12 @@
  * under the License.
  */
 
-package org.oidc.agent.sso;
+package org.wso2.identity.sdk.android.oidc.sso;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import org.oidc.agent.context.AuthenticationContext;
-import org.oidc.agent.handler.UserInfoRequestHandler;
-import org.oidc.agent.model.OAuth2TokenResponse;
+import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
+import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
 
 public interface LoginService {
 
@@ -35,7 +34,7 @@ public interface LoginService {
     void authorize(PendingIntent successIntent, PendingIntent failureIntent);
 
     /**
-     * Get call userinfo endpoint.
+     * Handles the call to userinfo endpoint.
      *
      * @param context  Authentication context.
      * @param callback Callback.

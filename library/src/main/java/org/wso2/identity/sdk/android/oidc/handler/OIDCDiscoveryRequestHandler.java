@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.oidc.agent.handler;
+package org.wso2.identity.sdk.android.oidc.handler;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -24,10 +24,10 @@ import android.util.Log;
 import okio.Okio;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.oidc.agent.exception.ClientException;
-import org.oidc.agent.exception.ServerException;
-import org.oidc.agent.model.OIDCDiscoveryResponse;
-import org.oidc.agent.util.Constants;
+import org.wso2.identity.sdk.android.oidc.exception.ClientException;
+import org.wso2.identity.sdk.android.oidc.exception.ServerException;
+import org.wso2.identity.sdk.android.oidc.model.OIDCDiscoveryResponse;
+import org.wso2.identity.sdk.android.oidc.constant.Constants;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

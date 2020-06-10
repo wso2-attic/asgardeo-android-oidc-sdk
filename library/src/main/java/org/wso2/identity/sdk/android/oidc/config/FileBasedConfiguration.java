@@ -17,10 +17,9 @@
  * under the License.
  */
 
-package org.oidc.agent.config;
+package org.wso2.identity.sdk.android.oidc.config;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.text.TextUtils;
@@ -37,9 +36,9 @@ import java.nio.charset.Charset;
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.Okio;
-import org.oidc.agent.exception.ClientException;
-import org.oidc.agent.library.R;
-import org.oidc.agent.util.Constants;
+import org.wso2.identity.sdk.android.oidc.R;
+import org.wso2.identity.sdk.android.oidc.exception.ClientException;
+import org.wso2.identity.sdk.android.oidc.constant.Constants;
 
 /**
  * Reads and validates the configuration from res/raw/oidc_config.json file.
@@ -65,10 +64,10 @@ public class FileBasedConfiguration implements Configuration {
     }
 
     /**
-     * Gives an instance of the ConfigManager class.
+     * Returns an instance of the FileBasedConfiguration class.
      *
      * @param context Context object with information about the current state of the application.
-     * @return ConfigManager instance.
+     * @return FileBasedConfiguration instance.
      */
     public static FileBasedConfiguration getInstance(Context context) throws ClientException {
 
@@ -82,7 +81,7 @@ public class FileBasedConfiguration implements Configuration {
     }
 
     /**
-     * Returns the client id specified in the res/raw/config.json file.
+     * Returns the client id specified in the res/raw/oidc_config.json file.
      *
      * @return Client ID.
      */
@@ -93,7 +92,7 @@ public class FileBasedConfiguration implements Configuration {
     }
 
     /**
-     * Returns the authorization scope specified in the res/raw/config.json file.
+     * Returns the authorization scope specified in the res/raw/oidc_config.json file.
      *
      * @return Authorization Scope.
      */
@@ -104,7 +103,7 @@ public class FileBasedConfiguration implements Configuration {
     }
 
     /**
-     * Returns the redirect URI specified in the res/raw/config.json file.
+     * Returns the redirect URI specified in the res/raw/oidc_config.json file.
      *
      * @return Redirect URI.
      */
@@ -115,7 +114,8 @@ public class FileBasedConfiguration implements Configuration {
     }
 
     /**
-     * Returns the discovery endpoint URI derived from issuer uri specified in the res/raw/config
+     * Returns the discovery endpoint URI derived from issuer uri specified in the
+     * res/raw/oidc_config
      * .json file.
      *
      * @return Token Endpoint URI.

@@ -19,7 +19,7 @@
 apply plugin: 'com.android.library'
 
 version = '0.0.1'
-group = 'org.wso2.carbon.identity.sso'
+group = 'org.wso2.identity.sdk.android.oidc'
 
 android {
     compileSdkVersion 29

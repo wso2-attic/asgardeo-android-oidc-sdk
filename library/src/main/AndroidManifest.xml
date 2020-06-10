@@ -17,10 +17,10 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.oidc.agent.library" >
+    package="org.wso2.identity.sdk.android.oidc" >
 
 <application>
-    <activity android:name="org.oidc.agent.handler.TokenManagementActivity"
+    <activity android:name="org.wso2.identity.sdk.android.oidc.activity.TokenManagementActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:launchMode="singleTask" />
