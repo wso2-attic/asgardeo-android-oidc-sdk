@@ -16,7 +16,7 @@
  * under the License.
  */
 // TODO:discuss on package name
-package org.oidc.agent.sso;
+package org.wso2.identity.sdk.android.oidc.sso;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -30,17 +30,17 @@ import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 import net.openid.appauth.ResponseTypeValues;
-import org.oidc.agent.config.Configuration;
-import org.oidc.agent.context.AuthenticationContext;
-import org.oidc.agent.exception.ClientException;
-import org.oidc.agent.config.FileBasedConfiguration;
-import org.oidc.agent.handler.OIDCDiscoveryRequestHandler;
-import org.oidc.agent.handler.TokenManagementActivity;
-import org.oidc.agent.handler.UserInfoRequestHandler;
-import org.oidc.agent.model.OAuth2TokenResponse;
-import org.oidc.agent.model.OIDCDiscoveryResponse;
-import org.oidc.agent.util.Constants;
-import org.oidc.agent.util.Util;
+import org.wso2.identity.sdk.android.oidc.config.Configuration;
+import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
+import org.wso2.identity.sdk.android.oidc.exception.ClientException;
+import org.wso2.identity.sdk.android.oidc.config.FileBasedConfiguration;
+import org.wso2.identity.sdk.android.oidc.handler.OIDCDiscoveryRequestHandler;
+import org.wso2.identity.sdk.android.oidc.activity.TokenManagementActivity;
+import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
+import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
+import org.wso2.identity.sdk.android.oidc.model.OIDCDiscoveryResponse;
+import org.wso2.identity.sdk.android.oidc.constant.Constants;
+import org.wso2.identity.sdk.android.oidc.util.Util;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
@@ -70,15 +70,15 @@ public class DefaultLoginService implements LoginService {
     private DefaultLoginService(Context context, Configuration configuration)
             throws ClientException {
 
-            mConfiguration = configuration;
-            mContext = new WeakReference<>(context);
+        mConfiguration = configuration;
+        mContext = new WeakReference<>(context);
     }
-
 
     /**
      * Handles the authorization flow by getting the endpoints from discovery service.
      * TODO: catch the errors and pass it to failure intent.
-     *  @param successIntent successIntent.
+     *
+     * @param successIntent successIntent.
      * @param failureIntent failureIntent.
      */
     public void authorize(PendingIntent successIntent, PendingIntent failureIntent) {
@@ -94,9 +94,9 @@ public class DefaultLoginService implements LoginService {
                         authenticationContext.setOIDCDiscoveryResponse(oidcDiscoveryResponse);
                         Log.i(LOG_TAG, oidcDiscoveryResponse.getAuthorizationEndpoint().toString());
                         authorizeRequest(TokenManagementActivity
-                                .createStartIntent(mContext.get(), successIntent, failureIntent,
-                                        mOAuth2TokenResponse, authenticationContext),
-                                failureIntent, authenticationContext);
+                                        .createStartIntent(mContext.get(), successIntent, failureIntent,
+                                                mOAuth2TokenResponse, authenticationContext), failureIntent,
+                                authenticationContext);
                     }
 
                 }).execute();
@@ -111,7 +111,7 @@ public class DefaultLoginService implements LoginService {
     private void authorizeRequest(PendingIntent completionIntent, PendingIntent cancelIntent,
             AuthenticationContext authenticationContext) {
 
-        if ( authenticationContext.getOIDCDiscoveryResponse() != null) {
+        if (authenticationContext.getOIDCDiscoveryResponse() != null) {
             mDiscovery = authenticationContext.getOIDCDiscoveryResponse();
             AuthorizationServiceConfiguration serviceConfiguration = new AuthorizationServiceConfiguration(
                     mDiscovery.getAuthorizationEndpoint(), mDiscovery.getTokenEndpoint());
@@ -141,6 +141,7 @@ public class DefaultLoginService implements LoginService {
      */
     public void logout(Context context, AuthenticationContext authenticationContext) {
 
+        //TODO: Clear the context
         OAuth2TokenResponse oAuth2TokenResponse = null;
         Map<String, String> paramMap = new HashMap<>();
         if (authenticationContext.getOAuth2TokenResponse() != null) {
@@ -152,9 +153,9 @@ public class DefaultLoginService implements LoginService {
                 mConfiguration.getRedirectUri().toString());
         try {
             if (authenticationContext.getOIDCDiscoveryResponse() != null) {
-                String url = Util.buildURLWithQueryParams(authenticationContext.getOIDCDiscoveryResponse()
-                                .getLogoutEndpoint().toString(),
-                        paramMap);
+                String url = Util.buildURLWithQueryParams(
+                        authenticationContext.getOIDCDiscoveryResponse().getLogoutEndpoint()
+                                .toString(), paramMap);
                 Log.d(LOG_TAG, "Handling logout request for service provider :" + mConfiguration
                         .getClientId());
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
@@ -167,12 +168,12 @@ public class DefaultLoginService implements LoginService {
         } catch (UnsupportedEncodingException e) {
             Log.e(LOG_TAG, "Error while creating logout request", e);
         }
-        dispose();
+        dispose(authenticationContext);
 
     }
 
     /**
-     * Return userinfo response.
+     * Returns userinfo response.
      *
      * @param callback UserInfoResponseCallback.
      */
@@ -187,12 +188,15 @@ public class DefaultLoginService implements LoginService {
     }
 
     /**
-     * Dispose the authorization service.
+     * Disposes the authorization service and authentication context.
      */
-    private void dispose() {
+    private void dispose(AuthenticationContext authenticationContext) {
 
         if (mAuthorizationService != null) {
             mAuthorizationService.dispose();
         }
+        authenticationContext.setOAuth2TokenResponse(null);
+        authenticationContext.setOIDCDiscoveryResponse(null);
+        authenticationContext.setUserInfoResponse(null);
     }
 }

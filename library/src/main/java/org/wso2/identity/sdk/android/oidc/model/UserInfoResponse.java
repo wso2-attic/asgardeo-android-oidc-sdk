@@ -16,13 +16,12 @@
  * under the License.
  */
 
-package org.oidc.agent.model;
+package org.wso2.identity.sdk.android.oidc.model;
 
 import android.util.Log;
-import androidx.annotation.NonNull;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.oidc.agent.util.Constants;
+import org.wso2.identity.sdk.android.oidc.constant.Constants;
 
 import java.io.Serializable;
 
@@ -31,8 +30,10 @@ import java.io.Serializable;
  */
 public class UserInfoResponse implements Serializable {
 
-    private String mUserInfoResponse;
+    private static final long serialVersionUID = -6173570286358038816L;
     private static final String LOG_TAG = "UserInfoResponse";
+
+    private String mUserInfoResponse;
 
     public UserInfoResponse(JSONObject userInfoResponse) {
 
@@ -64,12 +65,17 @@ public class UserInfoResponse implements Serializable {
             Log.d(LOG_TAG, "Get the value for the claim: " + property + " from userinfo response");
 
         } catch (JSONException e) {
-
+            Log.e(LOG_TAG, "Error while getting getting claims from userinfo response", e);
         }
         return userInfoProperty;
     }
 
-
+    /**
+     * Returns all claims from userinfo response.
+     *
+     * @return all claims.
+     * @throws JSONException JSONException.
+     */
     public JSONObject getUserInfoProperties() throws JSONException {
 
         Log.d(LOG_TAG, "Get all claim information from userinfo response");

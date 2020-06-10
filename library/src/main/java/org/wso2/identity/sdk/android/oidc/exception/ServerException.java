@@ -16,13 +16,14 @@
  * under the License.
  */
 
-package org.oidc.agent.exception;
+package org.wso2.identity.sdk.android.oidc.exception;
 
 /**
  * Handles the exception thrown from server side.
  */
-public class ServerException extends Throwable {
+public class ServerException extends Exception {
 
+    private static final long serialVersionUID = -4979347164683132721L;
     private String message;
 
     public ServerException(String msg) {

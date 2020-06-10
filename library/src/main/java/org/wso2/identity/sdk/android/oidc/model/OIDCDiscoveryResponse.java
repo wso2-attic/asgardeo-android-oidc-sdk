@@ -16,13 +16,13 @@
  * under the License.
  */
 
-package org.oidc.agent.model;
+package org.wso2.identity.sdk.android.oidc.model;
 
 import android.net.Uri;
 import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.oidc.agent.util.Constants;
+import org.wso2.identity.sdk.android.oidc.constant.Constants;
 
 import java.io.Serializable;
 
@@ -31,6 +31,7 @@ import java.io.Serializable;
  */
 public class OIDCDiscoveryResponse implements Serializable {
 
+    private static final long serialVersionUID = -7820932808808718698L;
     private String mDiscoveryResponse;
     private static final String LOG_TAG = "OAuthDiscoveryResponse";
 

@@ -16,28 +16,23 @@
  * under the License.
  */
 
-package org.oidc.agent.context;
+package org.wso2.identity.sdk.android.oidc.context;
 
-import android.content.Context;
-import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
-import androidx.annotation.RequiresApi;
-import net.openid.appauth.AuthorizationService;
-import org.oidc.agent.config.Configuration;
-import org.oidc.agent.model.OAuth2TokenResponse;
-import org.oidc.agent.model.OIDCDiscoveryResponse;
-import org.oidc.agent.model.UserInfoResponse;
-import org.oidc.agent.sso.DefaultLoginService;
+import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
+import org.wso2.identity.sdk.android.oidc.model.OIDCDiscoveryResponse;
+import org.wso2.identity.sdk.android.oidc.model.UserInfoResponse;
 
 import java.io.Serializable;
-import java.lang.ref.WeakReference;
 
+/**
+ * This class holds the all context related to authentication flow.
+ */
 public class AuthenticationContext implements Serializable {
 
-    private OAuth2TokenResponse mOAuth2TokenResponse;
-    private static final String LOG_TAG = "AuthenticationContext";
+    private static final long serialVersionUID = -6089927518022641315L;
+
     private OIDCDiscoveryResponse mDiscoveryResponse;
+    private OAuth2TokenResponse mOAuth2TokenResponse;
     private UserInfoResponse mUserInfoResponse;
 
     /**
