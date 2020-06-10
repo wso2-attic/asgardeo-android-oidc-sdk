@@ -16,7 +16,6 @@
  * under the License.
  */
 
-//TODO: org.wso2.identity.sdk.android.oidc.
 package org.wso2.identity.sdk.android.oidc.constant;
 
 public class Constants {

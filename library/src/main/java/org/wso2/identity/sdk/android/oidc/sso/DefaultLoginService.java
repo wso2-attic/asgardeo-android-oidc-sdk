@@ -15,7 +15,6 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-// TODO:discuss on package name
 package org.wso2.identity.sdk.android.oidc.sso;
 
 import android.app.PendingIntent;
@@ -76,7 +75,6 @@ public class DefaultLoginService implements LoginService {
 
     /**
      * Handles the authorization flow by getting the endpoints from discovery service.
-     * TODO: catch the errors and pass it to failure intent.
      *
      * @param successIntent successIntent.
      * @param failureIntent failureIntent.
@@ -141,7 +139,6 @@ public class DefaultLoginService implements LoginService {
      */
     public void logout(Context context, AuthenticationContext authenticationContext) {
 
-        //TODO: Clear the context
         OAuth2TokenResponse oAuth2TokenResponse = null;
         Map<String, String> paramMap = new HashMap<>();
         if (authenticationContext.getOAuth2TokenResponse() != null) {
@@ -164,11 +161,12 @@ public class DefaultLoginService implements LoginService {
                         Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_TASK
                                 | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 customTabsIntent.launchUrl(context.getApplicationContext(), Uri.parse(url));
+                dispose(authenticationContext);
             }
         } catch (UnsupportedEncodingException e) {
             Log.e(LOG_TAG, "Error while creating logout request", e);
         }
-        dispose(authenticationContext);
+
 
     }
 
