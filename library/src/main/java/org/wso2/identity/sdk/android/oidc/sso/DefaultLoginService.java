@@ -119,9 +119,9 @@ public class DefaultLoginService implements LoginService {
             AuthenticationContext authenticationContext) {
 
         if (authenticationContext.getOIDCDiscoveryResponse() != null) {
-            OIDCDiscoveryResponse mDiscovery = authenticationContext.getOIDCDiscoveryResponse();
+            OIDCDiscoveryResponse oidcDiscoveryResponse = authenticationContext.getOIDCDiscoveryResponse();
             AuthorizationServiceConfiguration serviceConfiguration = new AuthorizationServiceConfiguration(
-                    mDiscovery.getAuthorizationEndpoint(), mDiscovery.getTokenEndpoint());
+                    oidcDiscoveryResponse.getAuthorizationEndpoint(), oidcDiscoveryResponse.getTokenEndpoint());
 
             AuthorizationRequest.Builder builder = new AuthorizationRequest.Builder(
                     serviceConfiguration, mConfiguration.getClientId(), ResponseTypeValues.CODE,

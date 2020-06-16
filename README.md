@@ -192,7 +192,7 @@ To get the map of all claims
 
 To get a specific String claim
 
-`String claimValue = idTokenResponse.getClaim(String claimName)`
+`String claimValue = idTokenResponse.getClaim(claimName)`
 
 
 ### Get user details
