@@ -29,15 +29,21 @@ import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
 public interface LoginService {
 
     /**
-     * Handles authorization flow.
+     * Handles authorization flow and if callUserInfo value is true, then userinfo request will
+     * be made to the IdentityServer after successful token exchange. Else if callUserInfo value
+     * is false, SDK will not make any request to UserInfo Endpoint after token flow. Application can call
+     * userinfo endpoint explicitly by calling
+     * {@link #getUserInfo(AuthenticationContext, UserInfoRequestHandler.UserInfoResponseCallback)}
      *
      * @param successIntent Success intent.
      * @param failureIntent Failure Intent.
+     * @param callUserInfo  If it is true, Request to UserInfo endpoint will happen after token
+     *                      exchange. Else no request to user info endpoint.
      */
-    void authorize(PendingIntent successIntent, PendingIntent failureIntent);
+    void authorize(PendingIntent successIntent, PendingIntent failureIntent, Boolean callUserInfo);
 
     /**
-     * Handles the call to userinfo endpoint.
+     * Handles the call to UserInfo endpoint.
      *
      * @param context  Authentication context.
      * @param callback Callback.

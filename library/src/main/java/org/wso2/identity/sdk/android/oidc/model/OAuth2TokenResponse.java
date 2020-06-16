@@ -18,7 +18,14 @@
 
 package org.wso2.identity.sdk.android.oidc.model;
 
+import com.nimbusds.jwt.JWTClaimsSet;
+import com.nimbusds.jwt.SignedJWT;
+
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class contains the TokenResponse.
@@ -32,6 +39,7 @@ public class OAuth2TokenResponse implements Serializable {
     private Long mAccessTokenExpirationTime;
     private String mIdToken;
     private String mRefreshToken;
+    private IDTokenResponse mIdTokenResponse;
 
     /**
      * Set idToken.
@@ -39,13 +47,15 @@ public class OAuth2TokenResponse implements Serializable {
      * @param idToken idToken.
      */
     public void setIdToken(String idToken) {
+
         this.mIdToken = idToken;
+        this.mIdTokenResponse = new IDTokenResponse();
     }
 
     /**
      * Set accessToken.
      *
-     * @param accessToken accesstoken.
+     * @param accessToken accessToken.
      */
     public void setAccessToken(String accessToken) {
         this.mAccessToken = accessToken;
@@ -121,5 +131,106 @@ public class OAuth2TokenResponse implements Serializable {
      */
     public String getRefreshToken() {
         return mRefreshToken;
+    }
+
+    /**
+     * Returns IDToken Response.
+     *
+     * @return IDTokenResponse object.
+     */
+    public IDTokenResponse getIdTokenResponse() {
+
+        return mIdTokenResponse;
+    }
+
+    /**
+     * Stores IDToken response.
+     */
+    public class IDTokenResponse implements Serializable {
+
+        private static final long serialVersionUID = -3623225641770681283L;
+
+        /**
+         * Returns subject(sub) claim of IdToken.
+         *
+         * @return subject.
+         * @throws ParseException
+         */
+        public String getSubject() throws ParseException {
+
+            return getJWTClaimsSet().getSubject();
+        }
+
+        /**
+         * Returns Issuer(iss) claim of IdToken.
+         *
+         * @return Issuer.
+         * @throws ParseException
+         */
+        public String getIssuer() throws ParseException {
+
+            return getJWTClaimsSet().getIssuer();
+        }
+
+        /**
+         * Returns Audience(aud) claim of IdTOken.
+         *
+         * @return Audience.
+         * @throws ParseException
+         */
+        public List<String> getAudience() throws ParseException {
+
+            return getJWTClaimsSet().getAudience();
+        }
+
+        /**
+         * Returns IssueTime(iat) claim of IdToken.
+         *
+         * @return IssueTime.
+         * @throws ParseException
+         */
+        public Date getIssueTime() throws ParseException {
+
+            return getJWTClaimsSet().getIssueTime();
+        }
+
+        /**
+         * Returns ExpiryTime(exp) of IDToken
+         *
+         * @return ExpiryTime.
+         * @throws ParseException
+         */
+        public Date getExpiryTime() throws ParseException {
+
+            return getJWTClaimsSet().getExpirationTime();
+        }
+
+        /**
+         * Returns Map of all claims.
+         *
+         * @return Map of all claims.
+         * @throws ParseException
+         */
+        public Map<String, Object> getClaims() throws ParseException {
+
+            return getJWTClaimsSet().getClaims();
+        }
+
+        /**
+         * Returns the claim value of the required claim.
+         *
+         * @param claim ClaimName.
+         * @return ClaimValue.
+         * @throws ParseException
+         */
+        public String getClaim(String claim) throws ParseException {
+
+            return (String) getJWTClaimsSet().getStringClaim(claim);
+        }
+
+        private JWTClaimsSet getJWTClaimsSet() throws ParseException {
+
+            return SignedJWT.parse(mIdToken).getJWTClaimsSet();
+        }
     }
 }

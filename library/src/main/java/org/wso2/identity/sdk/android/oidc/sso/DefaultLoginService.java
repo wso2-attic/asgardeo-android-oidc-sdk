@@ -74,12 +74,21 @@ public class DefaultLoginService implements LoginService {
     }
 
     /**
-     * Handles the authorization flow by getting the endpoints from discovery service.
+     * Handles authorization flow by getting the endpoints from discovery service. If callUserInfo
+     * value is true, then UserInfo request will happen. Else if callUserInfo value
+     * is false, SDK will not make any request to UserInfo Endpoint after token flow. Application can call
+     * userinfo endpoint explicitly by calling
+     * {@link #getUserInfo(AuthenticationContext, UserInfoRequestHandler.UserInfoResponseCallback)}.
+     * After successful authorization, AuthenticationContext object will be returned in the success
+     * intent.
      *
-     * @param successIntent successIntent.
-     * @param failureIntent failureIntent.
+     * @param successIntent Success intent.
+     * @param failureIntent Failure Intent.
+     * @param callUserInfo  If it is true, Request to UserInfo endpoint will happen after token
+     *                      exchange. Else no request to user info endpoint.
      */
-    public void authorize(PendingIntent successIntent, PendingIntent failureIntent) {
+    public void authorize(PendingIntent successIntent, PendingIntent failureIntent,
+            Boolean callUserInfo) {
 
         // Creating a authentication context object to store context.
         AuthenticationContext authenticationContext = new AuthenticationContext();
@@ -89,12 +98,13 @@ public class DefaultLoginService implements LoginService {
                     if (exception != null) {
                         Log.e(LOG_TAG, "Error while calling discovery endpoint", exception);
                     } else {
+                        Log.i(LOG_TAG, "CallUserInfo" + callUserInfo);
                         authenticationContext.setOIDCDiscoveryResponse(oidcDiscoveryResponse);
                         Log.i(LOG_TAG, oidcDiscoveryResponse.getAuthorizationEndpoint().toString());
                         authorizeRequest(TokenManagementActivity
                                         .createStartIntent(mContext.get(), successIntent, failureIntent,
-                                                mOAuth2TokenResponse, authenticationContext), failureIntent,
-                                authenticationContext);
+                                                mOAuth2TokenResponse, authenticationContext, callUserInfo),
+                                failureIntent, authenticationContext);
                     }
 
                 }).execute();

@@ -94,8 +94,18 @@ In this example, we will call it LoginActivity:
 
 #### Authorization.
 
-Have a login button inside LoginActivity. Call the `doAuthorization(Context context)` method 
+Have a login button inside LoginActivity. Call the `doAuthorization()` method 
  when the login button is clicked to call authorization flow.
+ 
+ `authorize(PendingIntent successIntent, PendingIntent failureIntent,
+             Boolean callUserInfo)`
+ 
+ When calling authorize method of LoginService, you have to create completionIntent, and
+  cancelIntent.
+  
+  You can pass either true or false for callUserInfo parameter. If callUserInfo value is true, then userinfo request will be made to the IdentityServer after successful token exchange
+  . Else if callUserInfo value is false, SDK will not make any request to UserInfo Endpoint after
+   token flow. Application can call userinfo endpoint explicitly by calling `getUserInfo(AuthenticationContext, UserInfoRequestHandler.UserInfoResponseCallback)}`
 
 ```java
     findViewById(R.id.login).setOnClickListener(v ->
@@ -106,7 +116,6 @@ Have a login button inside LoginActivity. Call the `doAuthorization(Context cont
 ```java
 private void doAuthorization() {
    
-      mLoginService = new DefaultLoginService(this);
       Intent completionIntent = new Intent(this, UserInfoActivity.class);
       Intent cancelIntent = new Intent(this, LoginActivity.class);
       cancelIntent.putExtra("failed", true);
@@ -114,7 +123,7 @@ private void doAuthorization() {
       PendingIntent successIntent = PendingIntent.getActivity(this, 0, completionIntent, 0);
       PendingIntent failureIntent = PendingIntent.getActivity(this, 0, cancelIntent, 0);
 
-      mLoginService.authorize(successIntent, failureIntent);
+      mLoginService.authorize(successIntent, failureIntent, true);
    }
 ```
    

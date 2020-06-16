@@ -67,7 +67,7 @@ public class UserInfoRequestHandler extends AsyncTask<Void, Void, UserInfoRespon
             try {
                 if (mAuthenticationContext.getOIDCDiscoveryResponse() == null) {
                     throw new ClientException(
-                            "DiscoveryResponse is null. Reinitiate the " + "authentication");
+                            "DiscoveryResponse is null. Re-initiate the " + "authentication");
                 }
                 String accessToken = mAuthenticationContext.getOAuth2TokenResponse()
                         .getAccessToken();
