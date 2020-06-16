@@ -29,8 +29,9 @@ import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.TokenResponse;
-import net.openid.appauth.internal.Logger;
+import org.wso2.identity.sdk.android.oidc.constant.Constants;
 import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
+import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
 import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
 
 /**
@@ -42,20 +43,22 @@ public class TokenManagementActivity extends Activity {
     static final String KEY_CANCEL_INTENT = "cancelIntent";
     private static final String LOG_TAG = "TokenManagementActivity";
     private AuthorizationService mAuthorizationService;
-    PendingIntent mCompleteIntent;
-    PendingIntent mCancelIntent;
+    private PendingIntent mCompleteIntent;
+    private PendingIntent mCancelIntent;
     private static OAuth2TokenResponse sResponse;
-    static AuthenticationContext mAuthenticationContext;
+    private static AuthenticationContext mAuthenticationContext;
+    private static Boolean sCallUserInfo;
 
     public static PendingIntent createStartIntent(Context context, PendingIntent completeIntent,
             PendingIntent cancelIntent, OAuth2TokenResponse response,
-            AuthenticationContext authenticationContext) {
+            AuthenticationContext authenticationContext, Boolean callUserInfo) {
 
         Intent tokenExchangeIntent = new Intent(context, TokenManagementActivity.class);
         tokenExchangeIntent.putExtra(KEY_COMPLETE_INTENT, completeIntent);
         tokenExchangeIntent.putExtra(KEY_CANCEL_INTENT, cancelIntent);
         sResponse = response;
         mAuthenticationContext = authenticationContext;
+        sCallUserInfo = callUserInfo;
         return PendingIntent
                 .getActivity(context, 0, tokenExchangeIntent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
@@ -119,13 +122,11 @@ public class TokenManagementActivity extends Activity {
             Log.e(LOG_TAG, "Token Exchange failed", exception);
         } else {
             if (tokenResponse != null) {
-                Log.d(LOG_TAG, String.format("Token Response [ Access Token: %s, ID Token: %s ]",
-                        tokenResponse.accessToken, tokenResponse.idToken));
                 if (mCompleteIntent != null) {
-                    Logger.debug("Authorization complete - invoking completion intent");
+                    Log.d(LOG_TAG, "Authorization complete. Invoking completion intent");
                     setOAuth2Response(tokenResponse);
+                    handleUserInfoRequest();
                     mAuthorizationService.dispose();
-                    sendSuccessIntent();
                 }
             } else {
                 sendPendingIntent(mCancelIntent);
@@ -134,6 +135,10 @@ public class TokenManagementActivity extends Activity {
         finish();
     }
 
+    /**
+     * Set OAuth2TokenResponse object and add it into the AuthenticationContext object.
+     * @param tokenResponse TokenResponse
+     */
     private void setOAuth2Response(TokenResponse tokenResponse) {
 
         sResponse.setAccessToken(tokenResponse.accessToken);
@@ -144,10 +149,30 @@ public class TokenManagementActivity extends Activity {
         mAuthenticationContext.setOAuth2TokenResponse(sResponse);
     }
 
+    /**
+     * Handles UserInfo call after successful token exchange based on the input from the
+     * application.
+     */
+    private void handleUserInfoRequest() {
+
+        if (sCallUserInfo) {
+            new UserInfoRequestHandler(mAuthenticationContext, (userInfoResponse, ex) -> {
+                Log.d(LOG_TAG, "Calling UserInfo endpoint after token exchange is successful");
+                sendSuccessIntent();
+            }).execute();
+        } else {
+            sendSuccessIntent();
+        }
+    }
+
+    /**
+     * Send successIntent to the application embedding the authentication context object into the
+     * intent.
+     */
     private void sendSuccessIntent() {
 
         Intent intent = new Intent(this, mCompleteIntent.getIntentSender().getClass());
-        intent.putExtra("context", mAuthenticationContext);
+        intent.putExtra(Constants.AUTHENTICATION_CONTEXT, mAuthenticationContext);
         try {
             mCompleteIntent.send(this, 0, intent);
         } catch (PendingIntent.CanceledException e) {
