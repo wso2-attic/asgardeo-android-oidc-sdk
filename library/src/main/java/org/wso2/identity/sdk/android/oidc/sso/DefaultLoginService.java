@@ -58,7 +58,6 @@ public class DefaultLoginService implements LoginService {
     private OAuth2TokenResponse mOAuth2TokenResponse;
     private AuthorizationService mAuthorizationService;
     private static final String LOG_TAG = "LoginService";
-    private OIDCDiscoveryResponse mDiscovery;
 
     private DefaultLoginService(Context context) throws ClientException {
 
@@ -120,7 +119,7 @@ public class DefaultLoginService implements LoginService {
             AuthenticationContext authenticationContext) {
 
         if (authenticationContext.getOIDCDiscoveryResponse() != null) {
-            mDiscovery = authenticationContext.getOIDCDiscoveryResponse();
+            OIDCDiscoveryResponse mDiscovery = authenticationContext.getOIDCDiscoveryResponse();
             AuthorizationServiceConfiguration serviceConfiguration = new AuthorizationServiceConfiguration(
                     mDiscovery.getAuthorizationEndpoint(), mDiscovery.getTokenEndpoint());
 
