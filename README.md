@@ -203,7 +203,7 @@ If you called `LoginService.authorize(PendingIntent successIntent, PendingIntent
 , Boolean callUserInfo)` with callUserInfo parameter as true, then userinfo response will be
  stored in the AuthenticationContext object.
  
- To get UserInfoResposne from AuthenticationContext,
+ To get UserInfoResponse from AuthenticationContext,
 
 ```UserInfoResponse userInfoResponse = mAuthenticationContext.getUserInfoResponse();```
  
@@ -221,11 +221,13 @@ If you called `LoginService.authorize(PendingIntent successIntent, PendingIntent
 
  
 
-### Call userinfo explicitly.
+### Call UserInfo explicitly.
 
+You can get userclaims by calling User
 ```java
 private void getUserInfo(){
-   new UserInfoRequestHandler.UserInfoResponseCallback() {
+   mLoginService.getUserInfo(mAuthenticationContext,
+                  new UserInfoRequestHandler.UserInfoResponseCallback() {
                @Override
                public void onUserInfoRequestCompleted(UserInfoResponse userInfoResponse,
                        ServerException e) {
