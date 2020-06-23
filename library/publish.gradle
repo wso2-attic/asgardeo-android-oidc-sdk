@@ -24,8 +24,8 @@ apply plugin: 'com.jfrog.bintray'
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/wso2is-oidc-sdk-${version}.aar")
-            artifactId 'wso2is-oidc-sdk'
+            artifact("$buildDir/outputs/aar/$project.archivesBaseName-${version}.aar")
+            artifactId project.archivesBaseName
             groupId project.group
             version project.version
 
@@ -57,7 +57,7 @@ bintray {
     publish = true
     pkg {
         repo = 'oidc-android' // the name of the repository  created on Bintray
-        name = 'wso2is-oidc-sdk' // the name of the package created inside it
+        name = 'wso2-oidc-sdk' // the name of the package created inside it
         version {
             name = this.version
             released = new Date()
@@ -67,10 +67,10 @@ bintray {
 }
 
 afterEvaluate {
-    def file = file("$buildDir/outputs/aar/wso2is-oidc-sdk-release.aar")
+    def file = file("$buildDir/outputs/aar/$project.archivesBaseName-release.aar")
     tasks.named("assembleRelease").configure {
         doLast {
-            file.renameTo("$buildDir/outputs/aar/wso2is-oidc-sdk-${version}.aar")
+            file.renameTo("$buildDir/outputs/aar/$project.archivesBaseName-${version}.aar")
         }
     }
 }
