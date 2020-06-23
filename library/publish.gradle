@@ -66,6 +66,15 @@ bintray {
     }
 }
 
+afterEvaluate {
+    def file = file("$buildDir/outputs/aar/wso2is-oidc-sdk-release.aar")
+    tasks.named("assembleRelease").configure {
+        doLast {
+            file.renameTo("$buildDir/outputs/aar/wso2is-oidc-sdk-${version}.aar")
+        }
+    }
+}
+
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
