@@ -24,7 +24,7 @@ apply plugin: 'com.jfrog.bintray'
 publishing {
     publications {
         Production(MavenPublication) {
-            artifact("$buildDir/outputs/aar/wso2is-oidc-sdk-release.aar")
+            artifact("$buildDir/outputs/aar/wso2is-oidc-sdk-${version}.aar")
             artifactId 'wso2is-oidc-sdk'
             groupId project.group
             version project.version
