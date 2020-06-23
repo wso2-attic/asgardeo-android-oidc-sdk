@@ -19,21 +19,31 @@ Enable following properties:
 
 ### Initializing the  SDK
 
+#### Build the SDK locally.
+To Build the SDK in your local machine, 
+
+1. Clone the [SDK repo](https://github.com/wso2-extensions/identity-sdks-android)
+    - `git clone https://github.com/wso2-extensions/identity-sdks-android `
+
+2. Run the following commands.
+
+      - `./gradlew clean assembleRelease`
+      - `./gradlew publishToMavenLocal `
+
+3. Now the library will be available in your
+ local .m2 cache. 
+ 
 #### Add the dependency 
 
-1. Clone this project: https://github.com/wso2-extensions/identity-sdks-android.git.
-
-2. Build the library in your local maven. Run the following commands. Now the library will be available in your local .m2 cache. 
-    - `./gradlew clean assembleRelease`
-    - `./gradlew publishToMavenLocal `
-
-3. Add `WSO2-SDK` dependency in `build.gradle` file.
+Add [latest released Android-SDK](https://github.com/wso2-extensions/identity-sdks-android/releases) in
+     `build.gradle` file.
 
 ```gradle
 dependencies {
-     implementation 'org.wso2.identity.sdk.android.oidc:wso2is-oidc-sdk:0.0.1'
+   dependencies {
+        implementation 'org.wso2.identity.sdk.android.oidc:wso2-oidc-sdk:0.0.3'
+   }
 }
-
 ```
 
 #### Add a URI Scheme   
