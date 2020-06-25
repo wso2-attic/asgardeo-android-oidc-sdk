@@ -1,25 +1,32 @@
-
-# Overview
+# Start enable Authentication for Android App
+ 
+## Overview
 This android library currently supports:
 
 - [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1) using the [PKCE extension](https://tools.ietf.org/html/rfc7636)
 
-# Register Application
+## Register Application
 
- 1. Go to developer portal of Identity Server.
+ 1. Access WSO2 Identity Server Developer Portal .
  
- 2. Click On **Applications** and Open the **Mobile Application template**.
+ 2. Go to **Applications** and click **New Application**.
+  
+ 3. Click **Show More**
  
- 3. Enter the application name and description.
+ 4. Open **Mobile Application** template.
+  
+ 5. Enter **Name** and **Description** and click **Next**.
  
- 4. Enter the **Callback URL**. 
+ 6. Enter **Callback URL**. 
  
      The **Callback URL** is the exact location in the service provider's application where an access token would be sent. This URL should be the redirect scheme 
      of the application that the user is redirected to after successful authentication.
      
- 5. Click **Create** Button
+ 7. Click **Next**
  
- 6. Note the **OAuth Client Key** that appear. 
+ 8. View the application details and Click **Finish**
+ 
+ 9. Click on **Access** tab and Note the the **Client ID** that appears. 
  
   
 | Field                 | Value                         | 
@@ -35,9 +42,7 @@ This android library currently supports:
 | Service Provider Name | sample-app                    |
 | Description           | This is a mobile application  | 
 | CallBack Url          | wso2sample://oauth2           | 
-
-
-# Start enable Authentication for Android App
+ 
 
 ## Installation
 
@@ -61,14 +66,13 @@ If you want to build the SDK in your local machine,
 1. Clone the [SDK repo](https://github.com/wso2-extensions/identity-sdks-android)
     - `git clone https://github.com/wso2-extensions/identity-sdks-android `
 2. Add `mavenLocal()` under `repositories` in  the `build.gradle` file (This build.gradle file is
- the top-level build file where you can add configuration options common to all sub-projects/modules)
+ the top-level build file where you can add configuration options common to all sub-projects/modules).
 
     ```
     repositories {
-            google()
-            jcenter()
-            mavenLocal()
-            
+        google()
+        jcenter()
+        mavenLocal()           
      }
     ```
 
@@ -77,13 +81,12 @@ If you want to build the SDK in your local machine,
       - `./gradlew clean assembleRelease`
       - `./gradlew publishToMavenLocal `
 
-4. Now the library will be available in your
- local .m2 cache. 
+4. Now the library will be available in your local `.m2` cache. 
  
-### Add a URI Scheme   
-
-To redirect to the application from browser, it is necessary to add redirect scheme in the
- application. You need to add the  `appAuthRedirectScheme` in your app's  `build.gradle` file.
+### Add a URI Scheme 
+  
+You need to add a redirect scheme in the application. You need to add the `appAuthRedirectScheme` in your app's
+ `build.gradle` file.
 
 ```gradle
 android.defaultConfig.manifestPlaceholders = [
@@ -98,21 +101,19 @@ android.defaultConfig.manifestPlaceholders = [
 ]
 ```
 
-Verify that this should be consistent with the [CallBack Url](https://github.com/wso2-extensions/identity-samples-android#register-application) of the application that you configured in the
- developer-portal and in the oidc_config.json file. 
- Refer the [configuration section](https://github.com/wso2-extensions/identity-sdks-android#configuration)
+Verify that this should be consistent with the [CallBack Url](#register-application) of the application that you configured in the
+ developer-portal and in the `oidc_config.json` file. Refer the [configuration section](#configuration) for further information.
 
-For an example, if you have configured the callBackUrl as ‘wso2sample://oauth’, then the
- ‘appAuthRedirectScheme’ should be ‘wso2sample’
-
+For example, if you have configured the callBackUrl as `wso2sample://oauth2`, then the `appAuthRedirectScheme` should
+ be `wso2sample`
 
 ### Configuration
 
-Create a `oidc_config.json` file inside the `res/raw` folder. 
+Create the `oidc_config.json` file inside the `res/raw` folder. 
 
 - Copy the following configurations into the `oidc_config.json` file. 
 
-- Change the the **client_id**, **redirect_uri** configs. These should be taken from [application]((https://github.com/wso2-extensions/identity-samples-android#register-application)).
+- Change the **client_id** and **redirect_uri** configs. These should be taken from [application](#register-application).
 
 - Update the {HOST_NAME}:{PORT} with the IS server's hostname and port respectively in the **discovery_uri** config.
 
@@ -138,27 +139,25 @@ Example:
 
 ### Login
 
-- First, you need to initialize SDK object in your Activity that you are using to log users into your app. 
+- First, you need to initialize the SDK object in an `Activity` that you are using to log users into your app. 
 
-- In this example, we will call it LoginActivity. After successful authentication user will be redirected to another
- activity. Lets name it as UserInfoActivity.
+- In this example, we will call it `LoginActivity`. After successful authentication, the user will be redirected to
+ another `Activity`. Let's name it as `UserInfoActivity`.
 
 ```java
     LoginService mLoginService = new DefaultLoginService(this);
 ```
 
 
-- Have a login button inside LoginActivity. Here the button id is referred as `login`.
+- Have a `login button` inside `LoginActivity`. Here the button id is referred as `login`.
 
-- Call the`doLogin()` method  when the login button is clicked to initiate authentication with
- Identity Server.
+- Call the`doLogin()` method  when the `login button` is clicked to initiate authentication with WSO2 Identity Server.
  
-- When calling authorize method of LoginService, you have to create completionIntent, and
-  cancelIntent.
-  
-- You can pass either true or false for callUserInfo parameter. If callUserInfo value is true
-, then userinfo request will be made to the IdentityServer after successful token exchange. Else if callUserInfo value is false, SDK will not make any request to UserInfo Endpoint after
-   token flow.
+-You need to create `completionIntent` and `cancelIntent` while calling the `authorize` method of `LoginService`.
+
+- You can pass either `true` or `false` for the `callUserInfo` parameter. If `callUserInfo` value is `true`
+, then `userinfo request` will be made to the IdentityServer after successful token exchange. Else, if `callUserInfo`
+ value is `false`, SDK will not make any request to UserInfo Endpoint after token flow.
 
 ```java
     findViewById(R.id.login).setOnClickListener(v ->
@@ -184,13 +183,13 @@ Now you will be able to authenticate the user with Identity Server.
 
 ### Authentication Context.
 
-- After successful authentication, AuthenticationContext object will be returned in the Intent
-. This AuthenticationContext Object is used to store all context related to that authentication
+- After successful authentication, `AuthenticationContext` object will be returned in the Intent
+. This `AuthenticationContext` Object is used to store all the context related to that authentication
  flow.
 
-- From the `oncreate()` method of the UserInfo.Activity, get the AuthenticationContext object. 
+- From the `oncreate()` method of the `UserInfoActivity`, get the `AuthenticationContext` object. 
 
-- Authentication context object has User, OidcDiscovery response, tokenResponse, and UserinfoResponse.
+- Authentication context object has `User`, `OidcDiscovery response`,   `TokenResponse`, and `UserInfoResponse`.
  
 ```java
 @Override
@@ -205,7 +204,7 @@ Now you will be able to authenticate the user with Identity Server.
 
 ### Get User Details.
 
-Inorder to get user related information,
+In order to get user-related information,
 
 
 `String userName = mAuthenticationContext.getUser().getUserName();`
@@ -217,8 +216,8 @@ Inorder to get user related information,
 
 ## Get information related to token response
 
-To get information related to token response, first you need to get TokenResponse from
- AuthenticationContext. You can use the following code blocks.
+To get information related to token response, first you need to get `OAuth2TokenResponse` from
+ `AuthenticationContext`. You can use the following code blocks.
 
 ```OAuth2TokenResponse oAuth2TokenResponse = mAuthenticationContext.getOAuth2TokenResponse();```   
    
@@ -234,7 +233,7 @@ String refreshToken = oAuth2TokenResponse.getRefreshToken();
 
 ## Get claims from IDToken
 
-To get information from idToken , first you need to get IDTokenResponse from TokenResponse. 
+To get information from idToken , first you need to get `IDTokenResponse` from `OAuth2TokenResponse`. 
 You can use the following code blocks.
 
 ```
@@ -266,10 +265,10 @@ To get a specific String claim
 ### Get userinfo response from authentication context
 
 If you called `LoginService.authorize(PendingIntent successIntent, PendingIntent failureIntent
-, Boolean callUserInfo)` with callUserInfo parameter as true, then userinfo response will be
- stored in the AuthenticationContext object.
+, Boolean callUserInfo)` with `callUserInfo` parameter as `true`, then `UserInfoResponse` will be
+ stored in the `AuthenticationContext` object.
  
- To get UserInfoResponse from AuthenticationContext,
+ To get `UserInfoResponse` from `AuthenticationContext`,
 
 ```UserInfoResponse userInfoResponse = mAuthenticationContext.getUserInfoResponse();```
  
@@ -289,7 +288,7 @@ If you called `LoginService.authorize(PendingIntent successIntent, PendingIntent
 
 ### Call UserInfo explicitly.
 
-You can get userclaims by calling getUserInfo(..) method in the LoginService.
+You can get userclaims by calling `getUserInfo(..)` method in the `LoginService`.
 
 ```java
 private void getUserInfo(){
@@ -326,4 +325,4 @@ private void logout() {
 ```
 
 ## Sample app
-A sample is contained in this [repository](https://github.com/wso2-extensions/identity-samples-android.git)
+Refer this [repository](https://github.com/wso2-extensions/identity-samples-android.git) for a sample.
