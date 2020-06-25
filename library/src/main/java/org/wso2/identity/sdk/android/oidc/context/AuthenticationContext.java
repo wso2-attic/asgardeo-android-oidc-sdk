@@ -20,6 +20,7 @@ package org.wso2.identity.sdk.android.oidc.context;
 
 import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
 import org.wso2.identity.sdk.android.oidc.model.OIDCDiscoveryResponse;
+import org.wso2.identity.sdk.android.oidc.model.User;
 import org.wso2.identity.sdk.android.oidc.model.UserInfoResponse;
 
 import java.io.Serializable;
@@ -34,6 +35,7 @@ public class AuthenticationContext implements Serializable {
     private OIDCDiscoveryResponse mDiscoveryResponse;
     private OAuth2TokenResponse mOAuth2TokenResponse;
     private UserInfoResponse mUserInfoResponse;
+    private User mUser;
 
     /**
      * Set OIDCDiscoveryResponse.
@@ -63,6 +65,15 @@ public class AuthenticationContext implements Serializable {
     }
 
     /**
+     * Set User
+     *
+     * @param user User;
+     */
+    public void setUser(User user) {
+        this.mUser = user;
+    }
+
+    /**
      * Returns OAuth2TokenResponse.
      *
      * @return OAuth2TokenResponse.
@@ -87,5 +98,14 @@ public class AuthenticationContext implements Serializable {
      */
     public UserInfoResponse getUserInfoResponse() {
         return mUserInfoResponse;
+    }
+
+    /**
+     * Returns User;
+     *
+     * @return User;
+     */
+    public User getUser() {
+        return mUser;
     }
 }

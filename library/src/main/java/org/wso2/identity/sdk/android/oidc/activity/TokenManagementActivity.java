@@ -29,10 +29,16 @@ import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.TokenResponse;
+import org.json.JSONException;
 import org.wso2.identity.sdk.android.oidc.constant.Constants;
 import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
 import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
 import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
+import org.wso2.identity.sdk.android.oidc.model.User;
+import org.wso2.identity.sdk.android.oidc.util.Util;
+
+import java.text.ParseException;
+import java.util.Map;
 
 /**
  * This activity handles the token exchange flow.
@@ -125,6 +131,7 @@ public class TokenManagementActivity extends Activity {
                 if (mCompleteIntent != null) {
                     Log.d(LOG_TAG, "Authorization complete. Invoking completion intent");
                     setOAuth2Response(tokenResponse);
+                    setUser();
                     handleUserInfoRequest();
                     mAuthorizationService.dispose();
                 }
@@ -137,6 +144,7 @@ public class TokenManagementActivity extends Activity {
 
     /**
      * Set OAuth2TokenResponse object and add it into the AuthenticationContext object.
+     *
      * @param tokenResponse TokenResponse
      */
     private void setOAuth2Response(TokenResponse tokenResponse) {
@@ -147,6 +155,23 @@ public class TokenManagementActivity extends Activity {
         sResponse.setRefreshToken(tokenResponse.refreshToken);
         sResponse.setTokenType(tokenResponse.tokenType);
         mAuthenticationContext.setOAuth2TokenResponse(sResponse);
+    }
+
+    /**
+     * Set user after getting response from token endpoint
+     */
+    private void setUser() {
+
+        User user = new User();
+        try {
+            user.setUserName(mAuthenticationContext.getOAuth2TokenResponse().getIdTokenResponse()
+                    .getSubject());
+            user.setAttributes(mAuthenticationContext.getOAuth2TokenResponse().getIdTokenResponse()
+                    .getClaims());
+            mAuthenticationContext.setUser(user);
+        } catch (ParseException e) {
+            Log.e(LOG_TAG, "Error while setting properties for user");
+        }
     }
 
     /**
