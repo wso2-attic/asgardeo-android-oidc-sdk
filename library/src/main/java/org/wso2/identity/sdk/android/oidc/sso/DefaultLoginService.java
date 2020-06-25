@@ -204,5 +204,6 @@ public class DefaultLoginService implements LoginService {
         authenticationContext.setOAuth2TokenResponse(null);
         authenticationContext.setOIDCDiscoveryResponse(null);
         authenticationContext.setUserInfoResponse(null);
+        authenticationContext.setUser(null);
     }
 }

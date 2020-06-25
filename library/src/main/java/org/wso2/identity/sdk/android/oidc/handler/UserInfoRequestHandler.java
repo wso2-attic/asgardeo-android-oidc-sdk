@@ -26,8 +26,10 @@ import org.json.JSONObject;
 import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
 import org.wso2.identity.sdk.android.oidc.exception.ClientException;
 import org.wso2.identity.sdk.android.oidc.exception.ServerException;
+import org.wso2.identity.sdk.android.oidc.model.User;
 import org.wso2.identity.sdk.android.oidc.model.UserInfoResponse;
 import org.wso2.identity.sdk.android.oidc.constant.Constants;
+import org.wso2.identity.sdk.android.oidc.util.Util;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -85,6 +87,7 @@ public class UserInfoRequestHandler extends AsyncTask<Void, Void, UserInfoRespon
                 JSONObject json = new JSONObject(response);
                 mUserInfoResponse = new UserInfoResponse(json);
                 mAuthenticationContext.setUserInfoResponse(mUserInfoResponse);
+                setUser(mAuthenticationContext.getUser(), mUserInfoResponse);
 
             } catch (MalformedURLException e) {
                 String error = "Error while calling userinfo endpoint";
@@ -115,6 +118,22 @@ public class UserInfoRequestHandler extends AsyncTask<Void, Void, UserInfoRespon
         } else {
             mCallback.onUserInfoRequestCompleted(mUserInfoResponse, null);
         }
+    }
+
+    /**
+     * Set user object into AuthenticationContext.
+     *
+     * @param user             User.
+     * @param userInfoResponse UserInfoResponse.
+     * @throws JSONException
+     */
+    private void setUser(User user, UserInfoResponse userInfoResponse) throws JSONException {
+
+        if (user == null) {
+            user = new User();
+        }
+        user.setUserName(userInfoResponse.getSubject());
+        user.setAttributes(Util.toMap(userInfoResponse.getUserInfoProperties()));
     }
 
     /**
