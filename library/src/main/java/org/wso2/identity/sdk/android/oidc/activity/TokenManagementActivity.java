@@ -38,6 +38,10 @@ import org.wso2.identity.sdk.android.oidc.model.User;
 import org.wso2.identity.sdk.android.oidc.util.Util;
 
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -166,8 +170,20 @@ public class TokenManagementActivity extends Activity {
         try {
             user.setUserName(mAuthenticationContext.getOAuth2TokenResponse().getIdTokenResponse()
                     .getSubject());
-            user.setAttributes(mAuthenticationContext.getOAuth2TokenResponse().getIdTokenResponse()
-                    .getClaims());
+            ArrayList<String> serverClaims = new ArrayList<>(
+                    Arrays.asList("iss", "aud", "jti", "exp", "iat", "azp", "alg", "nonce", "acr",
+                            "auth_time", "max_age", "sid", "amr", "azp", "c_hash", "nbf",
+                            "at_hash"));
+
+            Map<String, Object> idTokenClaims = mAuthenticationContext.getOAuth2TokenResponse()
+                    .getIdTokenResponse().getClaims();
+            Map<String, Object> userClaims = new HashMap<>();
+            for (Map.Entry<String, Object> claimEntry : idTokenClaims.entrySet()) {
+                if (!serverClaims.contains(claimEntry.getKey())) {
+                    userClaims.put(claimEntry.getKey(), claimEntry.getValue());
+                }
+            }
+            user.setAttributes(userClaims);
             mAuthenticationContext.setUser(user);
         } catch (ParseException e) {
             Log.e(LOG_TAG, "Error while setting properties for user");
