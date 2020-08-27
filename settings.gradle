@@ -17,4 +17,4 @@
  */
 
 rootProject.name='asgardio-android-oidc-sdk'
-include ':library'
+include ':io.asgardio.android.oidc.sdk'
