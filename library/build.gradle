@@ -18,8 +18,8 @@
 
 apply plugin: 'com.android.library'
 
-version = '0.0.6-SNAPSHOT'
-group = 'org.wso2.identity.sdk.android.oidc'
+version = '0.1.0-SNAPSHOT'
+group = 'io.asgardio.android.oidc.sdk'
 
 android {
     compileSdkVersion 29
@@ -30,7 +30,7 @@ android {
         targetSdkVersion 29
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
-        archivesBaseName = "wso2-oidc-sdk"
+        archivesBaseName = "io.asgardio.android.oidc.sdk"
     }
 
     buildTypes {

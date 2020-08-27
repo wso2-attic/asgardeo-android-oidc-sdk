@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.model;
+package io.asgardio.android.oidc.sdk.model;
 
 import java.io.Serializable;
 import java.util.Map;

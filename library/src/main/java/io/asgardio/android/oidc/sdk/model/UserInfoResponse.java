@@ -16,12 +16,12 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.model;
+package io.asgardio.android.oidc.sdk.model;
 
 import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wso2.identity.sdk.android.oidc.constant.Constants;
+import io.asgardio.android.oidc.sdk.constant.Constants;
 
 import java.io.Serializable;
 

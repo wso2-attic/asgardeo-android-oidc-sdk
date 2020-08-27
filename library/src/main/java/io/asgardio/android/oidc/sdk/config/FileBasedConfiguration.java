@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.config;
+package io.asgardio.android.oidc.sdk.config;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -36,9 +36,9 @@ import java.nio.charset.Charset;
 import okio.Buffer;
 import okio.BufferedSource;
 import okio.Okio;
-import org.wso2.identity.sdk.android.oidc.R;
-import org.wso2.identity.sdk.android.oidc.exception.ClientException;
-import org.wso2.identity.sdk.android.oidc.constant.Constants;
+import io.asgardio.android.oidc.sdk.R;
+import io.asgardio.android.oidc.sdk.exception.ClientException;
+import io.asgardio.android.oidc.sdk.constant.Constants;
 
 /**
  * Reads and validates the configuration from res/raw/oidc_config.json file.

@@ -16,40 +16,25 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.config;
-
-import android.net.Uri;
+package io.asgardio.android.oidc.sdk.exception;
 
 /**
- * This interface is used to get configurations of an OIDC application.
+ * Handles exception from client side.
  */
-public interface Configuration {
+public class ClientException extends Exception {
 
-    /**
-     * Returns clientId.
-     *
-     * @return clientId.
-     */
-    String getClientId();
+    private static final long serialVersionUID = 4160996300934886856L;
+    private String message;
 
-    /**
-     * Returns scope.
-     *
-     * @return scope.
-     */
-    String getScope();
+    public ClientException(String msg) {
+        this.message = msg;
+    }
 
-    /**
-     * Returns redirect URI.
-     *
-     * @return redirectURI.
-     */
-    Uri getRedirectUri();
+    public ClientException(String msg, Exception e) {
+        this.message = msg;
+    }
 
-    /**
-     * Returns discovery URI.
-     *
-     * @return discoveryURI.
-     */
-    Uri getDiscoveryUri();
+    public String getMessage() {
+        return message;
+    }
 }

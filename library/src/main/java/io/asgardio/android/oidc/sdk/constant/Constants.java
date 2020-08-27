@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.constant;
+package io.asgardio.android.oidc.sdk.constant;
 
 /**
  * This class contains the constants required by this library.

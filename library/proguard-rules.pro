@@ -33,7 +33,7 @@
 # debugging stack traces.
 #-keepattributes SourceFile,LineNumberTable
 
--keep class org.wso2.identity.sdk.android.oidc.** {*; }
+-keep class io.asgardio.android.oidc.sdk.** {*; }
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.

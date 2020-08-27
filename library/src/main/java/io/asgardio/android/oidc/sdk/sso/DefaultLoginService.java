@@ -15,7 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.wso2.identity.sdk.android.oidc.sso;
+package io.asgardio.android.oidc.sdk.sso;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -29,17 +29,17 @@ import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 import net.openid.appauth.ResponseTypeValues;
-import org.wso2.identity.sdk.android.oidc.config.Configuration;
-import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
-import org.wso2.identity.sdk.android.oidc.exception.ClientException;
-import org.wso2.identity.sdk.android.oidc.config.FileBasedConfiguration;
-import org.wso2.identity.sdk.android.oidc.handler.OIDCDiscoveryRequestHandler;
-import org.wso2.identity.sdk.android.oidc.activity.TokenManagementActivity;
-import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
-import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
-import org.wso2.identity.sdk.android.oidc.model.OIDCDiscoveryResponse;
-import org.wso2.identity.sdk.android.oidc.constant.Constants;
-import org.wso2.identity.sdk.android.oidc.util.Util;
+import io.asgardio.android.oidc.sdk.config.Configuration;
+import io.asgardio.android.oidc.sdk.context.AuthenticationContext;
+import io.asgardio.android.oidc.sdk.exception.ClientException;
+import io.asgardio.android.oidc.sdk.config.FileBasedConfiguration;
+import io.asgardio.android.oidc.sdk.handler.OIDCDiscoveryRequestHandler;
+import io.asgardio.android.oidc.sdk.activity.TokenManagementActivity;
+import io.asgardio.android.oidc.sdk.handler.UserInfoRequestHandler;
+import io.asgardio.android.oidc.sdk.model.OAuth2TokenResponse;
+import io.asgardio.android.oidc.sdk.model.OIDCDiscoveryResponse;
+import io.asgardio.android.oidc.sdk.constant.Constants;
+import io.asgardio.android.oidc.sdk.util.Util;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;

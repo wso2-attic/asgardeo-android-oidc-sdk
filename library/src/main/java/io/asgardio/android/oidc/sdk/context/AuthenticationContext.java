@@ -16,12 +16,12 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.context;
+package io.asgardio.android.oidc.sdk.context;
 
-import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
-import org.wso2.identity.sdk.android.oidc.model.OIDCDiscoveryResponse;
-import org.wso2.identity.sdk.android.oidc.model.User;
-import org.wso2.identity.sdk.android.oidc.model.UserInfoResponse;
+import io.asgardio.android.oidc.sdk.model.OAuth2TokenResponse;
+import io.asgardio.android.oidc.sdk.model.OIDCDiscoveryResponse;
+import io.asgardio.android.oidc.sdk.model.User;
+import io.asgardio.android.oidc.sdk.model.UserInfoResponse;
 
 import java.io.Serializable;
 

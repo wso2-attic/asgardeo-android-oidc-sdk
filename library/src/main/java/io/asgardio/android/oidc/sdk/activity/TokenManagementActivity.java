@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.activity;
+package io.asgardio.android.oidc.sdk.activity;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -29,19 +29,16 @@ import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.TokenResponse;
-import org.json.JSONException;
-import org.wso2.identity.sdk.android.oidc.constant.Constants;
-import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
-import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
-import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
-import org.wso2.identity.sdk.android.oidc.model.User;
-import org.wso2.identity.sdk.android.oidc.util.Util;
+import io.asgardio.android.oidc.sdk.constant.Constants;
+import io.asgardio.android.oidc.sdk.context.AuthenticationContext;
+import io.asgardio.android.oidc.sdk.handler.UserInfoRequestHandler;
+import io.asgardio.android.oidc.sdk.model.OAuth2TokenResponse;
+import io.asgardio.android.oidc.sdk.model.User;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

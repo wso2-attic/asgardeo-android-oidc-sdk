@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.util;
+package io.asgardio.android.oidc.sdk.util;
 
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;

@@ -16,5 +16,5 @@
  * under the License.
  */
 
-rootProject.name='identity-sdks-android'
+rootProject.name='asgardio-android-oidc-sdk'
 include ':library'

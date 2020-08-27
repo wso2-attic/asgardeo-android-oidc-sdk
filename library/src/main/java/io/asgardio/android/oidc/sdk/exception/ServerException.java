@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.exception;
+package io.asgardio.android.oidc.sdk.exception;
 
 /**
  * Handles the exception thrown from server side.

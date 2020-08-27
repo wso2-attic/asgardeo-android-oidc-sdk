@@ -16,20 +16,20 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.handler;
+package io.asgardio.android.oidc.sdk.handler;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import okio.Okio;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
-import org.wso2.identity.sdk.android.oidc.exception.ClientException;
-import org.wso2.identity.sdk.android.oidc.exception.ServerException;
-import org.wso2.identity.sdk.android.oidc.model.User;
-import org.wso2.identity.sdk.android.oidc.model.UserInfoResponse;
-import org.wso2.identity.sdk.android.oidc.constant.Constants;
-import org.wso2.identity.sdk.android.oidc.util.Util;
+import io.asgardio.android.oidc.sdk.context.AuthenticationContext;
+import io.asgardio.android.oidc.sdk.exception.ClientException;
+import io.asgardio.android.oidc.sdk.exception.ServerException;
+import io.asgardio.android.oidc.sdk.model.User;
+import io.asgardio.android.oidc.sdk.model.UserInfoResponse;
+import io.asgardio.android.oidc.sdk.constant.Constants;
+import io.asgardio.android.oidc.sdk.util.Util;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

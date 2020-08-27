@@ -16,12 +16,12 @@
  * under the License.
  */
 
-package org.wso2.identity.sdk.android.oidc.sso;
+package io.asgardio.android.oidc.sdk.sso;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
-import org.wso2.identity.sdk.android.oidc.handler.UserInfoRequestHandler;
+import io.asgardio.android.oidc.sdk.context.AuthenticationContext;
+import io.asgardio.android.oidc.sdk.handler.UserInfoRequestHandler;
 
 /**
  * Provides the interface for authentication and logout mechanism.
