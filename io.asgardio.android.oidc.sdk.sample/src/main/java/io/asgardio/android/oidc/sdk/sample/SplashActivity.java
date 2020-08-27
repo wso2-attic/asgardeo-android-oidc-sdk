@@ -1,10 +1,12 @@
-package org.wso2.oidc.sample;
+package io.asgardio.android.oidc.sdk.sample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import io.asgardio.android.oidc.sdk.sample.R;
 
 public class SplashActivity extends AppCompatActivity {
 

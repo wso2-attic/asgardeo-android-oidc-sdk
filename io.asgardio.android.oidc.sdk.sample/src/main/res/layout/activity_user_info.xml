@@ -23,7 +23,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="org.wso2.oidc.sample.UserInfoActivity">
+    tools:context="org.wso2.oidc.sample.io.asgardio.android.oidc.sdk.sample.sample.UserInfoActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"

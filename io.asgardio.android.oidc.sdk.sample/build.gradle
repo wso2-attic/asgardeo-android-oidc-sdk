@@ -30,8 +30,8 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        archivesBaseName = "io.asgardio.android.oidc.sdk.sample"
     }
 
     buildTypes {
@@ -64,8 +64,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'org.wso2.identity.sdk.android.oidc:wso2-oidc-sdk:0.0.5'
-
+    implementation 'io.asgardio.android.oidc.sdk:io.asgardio.android.oidc.sdk:0.1.0-SNAPSHOT'
 }
 android.defaultConfig.manifestPlaceholders = [
         'appAuthRedirectScheme': 'wso2sample'

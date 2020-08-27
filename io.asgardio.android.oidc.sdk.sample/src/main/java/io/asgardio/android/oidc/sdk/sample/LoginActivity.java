@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.oidc.sample;
+package io.asgardio.android.oidc.sdk.sample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,8 +24,10 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
-import org.wso2.identity.sdk.android.oidc.sso.DefaultLoginService;
-import org.wso2.identity.sdk.android.oidc.sso.LoginService;
+import io.asgardio.android.oidc.sdk.sample.R;
+
+import io.asgardio.android.oidc.sdk.sso.DefaultLoginService;
+import io.asgardio.android.oidc.sdk.sso.LoginService;
 
 public class LoginActivity extends AppCompatActivity {
 

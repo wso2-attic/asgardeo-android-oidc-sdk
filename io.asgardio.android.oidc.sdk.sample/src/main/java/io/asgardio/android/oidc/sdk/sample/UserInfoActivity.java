@@ -16,7 +16,7 @@
  * under the License.
  */
 
-package org.wso2.oidc.sample;
+package io.asgardio.android.oidc.sdk.sample;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -36,12 +36,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
+import io.asgardio.android.oidc.sdk.sample.R;
 
-import org.wso2.identity.sdk.android.oidc.context.AuthenticationContext;
-import org.wso2.identity.sdk.android.oidc.model.OAuth2TokenResponse;
-import org.wso2.identity.sdk.android.oidc.model.UserInfoResponse;
-import org.wso2.identity.sdk.android.oidc.sso.DefaultLoginService;
-import org.wso2.identity.sdk.android.oidc.sso.LoginService;
+import io.asgardio.android.oidc.sdk.context.AuthenticationContext;
+import io.asgardio.android.oidc.sdk.model.OAuth2TokenResponse;
+import io.asgardio.android.oidc.sdk.model.UserInfoResponse;
+import io.asgardio.android.oidc.sdk.sso.DefaultLoginService;
+import io.asgardio.android.oidc.sdk.sso.LoginService;
 
 import java.sql.Date;
 import java.sql.Timestamp;
