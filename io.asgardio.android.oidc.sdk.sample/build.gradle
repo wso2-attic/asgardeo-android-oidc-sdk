@@ -25,13 +25,12 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "io.asgardio.android.oidc.sdk.sample"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        archivesBaseName = "io.asgardio.android.oidc.sdk.sample"
     }
 
     buildTypes {
@@ -46,15 +45,6 @@ android {
     }
 
 }
-task incrementVersion {
-
-    if (project.hasProperty('newVersion')) {
-        println 'Set Project to new Version ' + newVersion
-        String s = buildFile.getText().replaceFirst("version = '$version'", "version = '" +
-                newVersion + "'")
-        buildFile.setText(s)
-    }
-}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -66,6 +56,17 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation "io.asgardio.android.oidc.sdk:io.asgardio.android.oidc.sdk:$version"
 }
+
 android.defaultConfig.manifestPlaceholders = [
         'appAuthRedirectScheme': 'wso2sample'
 ]
+
+// Run this task with `./gradlew increment -PnewVersion=1.0.0` to change the version.
+task incrementVersion {
+    if (project.hasProperty('newVersion')) {
+        println 'Set Project to new Version ' + newVersion
+        String s = buildFile.getText().replaceFirst("version = '$version'", "version = '" +
+                newVersion + "'")
+        buildFile.setText(s)
+    }
+}

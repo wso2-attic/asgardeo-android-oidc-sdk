@@ -15,6 +15,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package io.asgardio.android.oidc.sdk.sample;
 
 import android.content.Intent;
