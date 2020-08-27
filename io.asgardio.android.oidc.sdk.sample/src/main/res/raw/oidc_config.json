@@ -1,0 +1,6 @@
+{
+  "client_id": "tqVQ5YCvmlbdT9Z5FfK_bEnyUzca",
+  "redirect_uri": "wso2sample://oauth2",
+  "authorization_scope": "openid",
+  "discovery_uri": "https://devcloud.kubesb.com/t/usertest.com/oauth2/oidcdiscovery/.well-known/openid-configuration"
+}

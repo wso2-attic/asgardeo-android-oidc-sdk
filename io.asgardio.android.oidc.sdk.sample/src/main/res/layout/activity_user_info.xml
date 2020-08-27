@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+  ~
+  ~ WSO2 Inc. licenses this file to you under the Apache License,
+  ~ Version 2.0 (the "License"); you may not use this file except
+  ~ in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context="org.wso2.oidc.sample.UserInfoActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:elevation="2dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/splash_title"
+        android:textAlignment="center"
+        android:textColor="@color/bg_color"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/brackground"
+        android:layout_marginTop="160sp"
+        android:paddingTop="5sp"
+
+        android:fillViewport="true"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|top"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:paddingTop="20sp"
+            android:paddingBottom="210sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.075">
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/personal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    app:cardBackgroundColor="#FFF"
+                    app:cardCornerRadius="4dp"
+                    app:cardElevation="0dp"
+                    app:contentPadding="10sp">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <TextView
+                            android:id="@+id/greeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/username"
+                            android:layout_alignParentStart="true"
+                            android:singleLine="true"
+                            android:text="@string/greeting_one"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:id="@+id/greeting_soft"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/greeting"
+                            android:layout_alignParentStart="true"
+                            android:singleLine="true"
+                            android:text="@string/greeting_two"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:textStyle="normal" />
+
+                    <ImageView
+                            android:id="@+id/userAvatar"
+                            android:layout_width="50sp"
+                            android:layout_height="50sp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="10sp"
+                            android:contentDescription="avatar"
+                            android:gravity="end"
+                            app:srcCompat="@drawable/user" />
+
+                    <TextView
+                            android:id="@+id/userView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/userAvatar"
+                            android:layout_marginTop="15sp"
+                            android:text="@string/user_name"
+                            android:textColor="@color/black"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    <TextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/userView"
+                            android:textColor="@color/light_black"
+                            android:textSize="14sp" />
+
+                    <TextView
+                            android:id="@+id/username"
+                            android:layout_width="match_parent"
+                            android:layout_height="20sp"
+                            android:layout_alignParentStart="true"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    <LinearLayout
+                            android:id="@+id/user_details"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/name"
+                            android:layout_marginBottom="20sp"
+                            android:orientation="vertical"
+                            android:visibility="gone" />
+
+                    <Button
+                            android:id="@+id/show_user_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="29dp"
+                            android:layout_below="@id/user_details"
+                            android:background="@drawable/subdtle_btn"
+                            android:text="@string/showuserbtn"
+                            android:textAllCaps="false"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="normal" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/access_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/personal"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFF"
+                app:contentPadding="10sp"
+                android:layout_margin="5sp"
+                app:cardCornerRadius="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tokentextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/accesstoken"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="10sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/acc_type_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20sp"
+                        android:text="Token Type"
+                        android:layout_below="@id/tokentextView"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/acc_type_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20sp"
+                        android:layout_below="@id/acc_type_view"
+                        android:layout_marginBottom="15sp"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/acc_exp_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20sp"
+                        android:text="Token Expiry Date"
+                        android:layout_below="@id/acc_type_value"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/acc_exp_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20sp"
+                        android:text=""
+                        android:layout_below="@id/acc_exp_view"
+                        android:layout_marginBottom="15sp"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/acc_exp_value"
+                        android:id="@+id/access_token_details"
+                        android:visibility="gone"
+                        android:layout_marginBottom="10sp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/accesstoken_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20sp"
+                            android:text="Token"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/accesstoken"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginBottom="15sp"/>
+
+                        <TextView
+                            android:id="@+id/refreshToken_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20sp"
+                            android:text="Refresh Token"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/refreshToken_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/access_copy"
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="0sp"
+                        android:contentDescription="avatar"
+                        android:gravity="end"
+                        app:srcCompat="@drawable/copy" />
+
+                    <Button
+                        android:id="@+id/show_access_token_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="23dp"
+                        android:layout_below="@id/access_token_details"
+                        android:background="@drawable/subdtle_btn"
+                        android:text="@string/showbtn"
+                        android:textStyle="normal"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/id_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/access_token"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFF"
+                app:contentPadding="10sp"
+                android:layout_margin="5sp"
+                android:layout_marginTop="0sp"
+                app:cardCornerRadius="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/idtextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/idtoken"
+                        android:textColor="@color/black"
+                        android:layout_marginBottom="10sp"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/id_copy"
+                        android:layout_width="20sp"
+                        android:layout_height="20sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="10sp"
+                        android:contentDescription="copy"
+                        android:gravity="end"
+                        app:srcCompat="@drawable/copy" />
+
+                    <TextView
+                        android:id="@+id/exp_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20sp"
+                        android:text="Token Expire on"
+                        android:layout_below="@id/id_copy"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/exp_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20sp"
+                        android:layout_below="@id/exp_view"
+                        android:layout_marginBottom="15sp"
+                        android:textSize="14sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/id_token_details"
+                        android:layout_below="@id/exp_value"
+                        android:visibility="gone"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/token_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20sp"
+                            android:text="Token"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/idtoken"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20sp"
+                            android:textSize="14sp"
+                            android:layout_marginBottom="20sp"/>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/show_id_token_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="23dp"
+                        android:layout_below="@id/id_token_details"
+                        android:background="@drawable/subdtle_btn"
+                        android:layout_marginTop="10sp"
+                        android:text="@string/showbtn"
+                        android:textStyle="normal"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimary" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
