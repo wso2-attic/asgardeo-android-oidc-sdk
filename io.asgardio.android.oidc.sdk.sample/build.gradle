@@ -18,7 +18,7 @@
 
 apply plugin: 'com.android.application'
 
-version = '0.0.2-SNAPSHOT'
+version = '0.1.0-SNAPSHOT'
 
 android {
     compileSdkVersion 29
@@ -64,7 +64,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'io.asgardio.android.oidc.sdk:io.asgardio.android.oidc.sdk:0.1.0-SNAPSHOT'
+    implementation "io.asgardio.android.oidc.sdk:io.asgardio.android.oidc.sdk:$version"
 }
 android.defaultConfig.manifestPlaceholders = [
         'appAuthRedirectScheme': 'wso2sample'

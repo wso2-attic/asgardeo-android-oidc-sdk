@@ -18,13 +18,11 @@
 
 package io.asgardio.android.oidc.sdk.sample;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 
-import io.asgardio.android.oidc.sdk.sample.R;
+import androidx.appcompat.app.AppCompatActivity;
 
 import io.asgardio.android.oidc.sdk.sso.DefaultLoginService;
 import io.asgardio.android.oidc.sdk.sso.LoginService;
@@ -43,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
      * Handles the authorization code flow. Build the authorization request with the given
      * parameters and sent it to the IDP. If the authorization request is successful,
      * UserInfoActivity will handle it.
-     *
      */
     private void doAuthorization() {
 

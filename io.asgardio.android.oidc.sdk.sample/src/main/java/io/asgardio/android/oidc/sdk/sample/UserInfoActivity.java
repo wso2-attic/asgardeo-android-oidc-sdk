@@ -18,9 +18,6 @@
 
 package io.asgardio.android.oidc.sdk.sample;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -35,19 +32,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import org.json.JSONException;
-import io.asgardio.android.oidc.sdk.sample.R;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Iterator;
+import java.util.Map;
 
 import io.asgardio.android.oidc.sdk.context.AuthenticationContext;
 import io.asgardio.android.oidc.sdk.model.OAuth2TokenResponse;
 import io.asgardio.android.oidc.sdk.model.UserInfoResponse;
 import io.asgardio.android.oidc.sdk.sso.DefaultLoginService;
 import io.asgardio.android.oidc.sdk.sso.LoginService;
-
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.Iterator;
-import java.util.Map;
 
 public class UserInfoActivity extends AppCompatActivity {
 
@@ -108,10 +107,10 @@ public class UserInfoActivity extends AppCompatActivity {
         getUIContent();
     }
 
-    private void getUser(){
+    private void getUser() {
 
         mName = mAuthenticationContext.getUser().getUserName();
-        Map<String, Object> attr= mAuthenticationContext.getUser().getAttributes();
+        Map<String, Object> attr = mAuthenticationContext.getUser().getAttributes();
 
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.user_details);
 
