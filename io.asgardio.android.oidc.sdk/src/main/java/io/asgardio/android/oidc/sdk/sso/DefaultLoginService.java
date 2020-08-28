@@ -59,14 +59,17 @@ public class DefaultLoginService implements LoginService {
     private AuthorizationService mAuthorizationService;
     private static final String LOG_TAG = "LoginService";
 
-    private DefaultLoginService(Context context) throws ClientException {
+    public DefaultLoginService(Context context) {
 
-        mContext = new WeakReference<>(context);
-        mConfiguration = FileBasedConfiguration.getInstance(context);
+        try {
+            mContext = new WeakReference<>(context);
+            mConfiguration = FileBasedConfiguration.getInstance(context);
+        } catch (ClientException e) {
+            Log.e(LOG_TAG, "Error while accessing FileBasedConfiguration instance", e);
+        }
     }
 
-    private DefaultLoginService(Context context, Configuration configuration)
-            throws ClientException {
+    public DefaultLoginService(Context context, Configuration configuration) {
 
         mConfiguration = configuration;
         mContext = new WeakReference<>(context);
