@@ -106,22 +106,23 @@ sections listed below.
 3. By default IS uses a self-signed certificate. If you are using the default pack without
     changing to a CA signed certificate, follow this [guide](https://developer.android.com/training/articles/security-config) to get rid of SSL issues.
 
-4. Change the hostname of IS as 10.0.2.2.
+4. Change the hostname of IS as 10.0.2.2 in the <IS_HOME>/deployment.toml.<br/>
     i. Create a new keystore with CN as localhost and SAN as 10.0.2.2
-
-        ```shell script
-        keytool -genkey -alias wso2carbon -keyalg RSA -keystore wso2carbon.jks -keysize 2048 -ext SAN=IP:10.0.2.2
-        ```
+    
+         ```
+         keytool -genkey -alias wso2carbon -keyalg RSA -keystore wso2carbon.jks -keysize 2048 -ext SAN=IP:10.0.2.2
+         ```
 
     ii. Export the public certificate (name it as wso2carbon.pem)to add into the truststore.
-        ```shell script
-        keytool -exportcert -alias wso2carbon -keystore wso2carbon.jks -rfc -file wso2carbon.pem
-        ```
+    
+         ```
+         keytool -exportcert -alias wso2carbon -keystore wso2carbon.jks -rfc -file wso2carbon.pem
+         ```
     iii. Import the certificate in the client-truststore.jks file located in `<IS_HOME>/repository/resources/security/`
-       ```shell script
-      keytool -import -alias wso2is -file wso2carbon.pem -keystore client-truststore.jks
-             -storepass wso2carbon
-       ```
+    
+         ```
+         keytool -import -alias wso2is -file wso2carbon.pem -keystore client-truststore.jks -storepass wso2carbon
+         ```
     iv. Now copy this public certificate (wso2carbon.pem) into the `io.asgardio.android.oidc.sdk.sample/res/raw` folder.
 
 5. Select the Virtual Device to run the application.
