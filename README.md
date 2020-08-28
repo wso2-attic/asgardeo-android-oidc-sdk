@@ -12,12 +12,6 @@ This android library currently supports:
 - [Getting started](#getting-started)
 - [Integrating OIDC SDK to your Android application](#integrating-oidc-sdk-to-your-android-application)
 - [Authentication SPI](#authentication-spi)
-  * [Get information related to token response](#get-information-related-to-token-response)
-  * [Get claims from ID Token](#get-claims-from-id-token)
-  * [Get userinfo response](#get-userinfo-response)
-    + [Get userinfo response from authentication context](#get-userinfo-response-from-authentication-context)
-    + [Call UserInfo explicitly.](#call-userinfo-explicitly)
-    + [Logout](#logout)
 - [Contributing](#contributing)
   * [Reporting issues](#reporting-issues)
 - [License](#license)
@@ -277,6 +271,12 @@ Map<String, Object> userAttributes = mAuthenticationContext.getUser().getAttribu
 ```
 
 # Authentication SPI
+* [Get information related to token response](#get-information-related-to-token-response)
+* [Get claims from ID Token](#get-claims-from-id-token)
+* [Get userinfo response](#get-userinfo-response)
+   + [Get userinfo response from authentication context](#get-userinfo-response-from-authentication-context)
+   + [Call UserInfo explicitly.](#call-userinfo-explicitly)
+* [Logout](#logout)
 ## Get information related to token response
 
 - To get information related to token response, first you need to get `OAuth2TokenResponse` from
