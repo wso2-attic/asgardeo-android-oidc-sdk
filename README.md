@@ -1,36 +1,38 @@
 # Asgardio Android OIDC SDK
+[![Stackoverflow](https://img.shields.io/badge/Ask%20for%20help%20on-Stackoverflow-orange)](https://stackoverflow.com/questions/tagged/wso2is)
+[![Join the chat at https://join.slack.com/t/wso2is/shared_invite/enQtNzk0MTI1OTg5NjM1LTllODZiMTYzMmY0YzljYjdhZGExZWVkZDUxOWVjZDJkZGIzNTE1NDllYWFhM2MyOGFjMDlkYzJjODJhOWQ4YjE](https://img.shields.io/badge/Join%20us%20on-Slack-%23e01563.svg)](https://join.slack.com/t/wso2is/shared_invite/enQtNzk0MTI1OTg5NjM1LTllODZiMTYzMmY0YzljYjdhZGExZWVkZDUxOWVjZDJkZGIzNTE1NDllYWFhM2MyOGFjMDlkYzJjODJhOWQ4YjE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/wso2/product-is/blob/master/LICENSE)
+[![Twitter](https://img.shields.io/twitter/follow/wso2.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=wso2)
+---
 Asgardio Android OIDC SDK is a library that can be used to secure any Android application.
 This android library currently supports:
 - [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1) using the [PKCE extension](https://tools.ietf.org/html/rfc7636)
 
 ## Table of Contents
-  * [Trying out the sample](#trying-out-the-sample)
-    + [Configuring Identity Server](#configuring-identity-server)
-    + [Configuring the sample](#configuring-the-sample)
-    + [Running the sample](#running-the-sample)
-      - [Running in an Android Emulator](#running-in-an-android-emulator)
-      - [Running in an Android Device](#running-in-an-android-device)
-  * [Integrating OIDC SDK to your Android application](#integrating-oidc-sdk-to-your-android-application)
-    + [Getting started](#getting-started)
-    + [Configuring the sample](#configuring-the-sample-1)
-    + [Login](#login)
-    + [Authentication context.](#authentication-context)
-    + [Get user details.](#get-user-details)
-- [Authentication context information](#authentication-context-information)
+- [Getting started](#getting-started)
+- [Integrating OIDC SDK to your Android application](#integrating-oidc-sdk-to-your-android-application)
+- [Authentication SPI](#authentication-spi)
   * [Get information related to token response](#get-information-related-to-token-response)
   * [Get claims from ID Token](#get-claims-from-id-token)
   * [Get userinfo response](#get-userinfo-response)
     + [Get userinfo response from authentication context](#get-userinfo-response-from-authentication-context)
     + [Call UserInfo explicitly.](#call-userinfo-explicitly)
     + [Logout](#logout)
-  * [Installing the SDK](#installing-the-sdk)
-  * [Contributing](#contributing)
-    + [Reporting issues](#reporting-issues)
-  * [License](#license)
-  
-## Trying out the sample
-### Configuring Identity Server
-1. Start the WSO2 IS. 
+- [Contributing](#contributing)
+  * [Reporting issues](#reporting-issues)
+- [License](#license)
+
+## Getting started
+You can experience the capabilities of Asgardio Android OIDC SDK by following this small guide which contains main
+sections listed below.
++ [Configuring the Identity Server](#configuring-the-identity-server)
++ [Configuring the sample](#configuring-the-sample)
++ [Running the sample](#running-the-sample)
+  - [Running in an Android Emulator](#running-in-an-android-emulator)
+  - [Running in an Android Device](#running-in-an-android-device)
+
+### Configuring the Identity Server
+1. Start the WSO2 IS.
 2. Access WSO2 IS management console from https://localhost:9443/carbon/ and create a service provider.
    ![Management Console](https://user-images.githubusercontent.com/15249242/91068131-6fc2d380-e651-11ea-9d0a-d58c825bbb68.png)
    i. Navigate to the `Service Providers` tab listed under the `Identity` section in the management console and click `Add`.<br/>
@@ -38,14 +40,14 @@ This android library currently supports:
     `Edit Service Provider` page.<br/>
    iii. Expand the  `Inbound Authentication Configuration` section and click `Configure` under the `OAuth/OpenID Connect Configuration` section.<br/>
    iv. Provide the following values for the respective fields and click `Update` while keeping other default settings as it is.
-   
-       Callback Url - wso2sample://oauth2 
+
+       Callback Url - wso2sample://oauth2
        PKCE Mandatory - True
        Allow authentication without the client secret - True
    v. Click `Update` to save.
 
-3. Once the service provider is saved, you will be redirected to the `Service Provider Details` page. Here, expand the  
-    `Inbound Authentication Configuration` section and click the `OAuth/OpenID Connect Configuration` section. Copy the 
+3. Once the service provider is saved, you will be redirected to the `Service Provider Details` page. Here, expand the
+    `Inbound Authentication Configuration` section and click the `OAuth/OpenID Connect Configuration` section. Copy the
     value of  `OAuth Client Key` shown here.
     ![OAuth Client Credentials](https://user-images.githubusercontent.com/15249242/91567068-27155e00-e962-11ea-8eab-b3bdd790bfd4.png)
 
@@ -54,12 +56,12 @@ This android library currently supports:
 
 2. Open the cloned project directory via Android Studio.
 
-3. Add the relevant configs in oidc_config.json file located in `res/raw` folder. 
-   
-   - Replace the value of `client-id` with the value of `OAuth Client Key` property which you copied in the step 3 when 
-     configuring Identity Server.
+3. Add the relevant configs in oidc_config.json file located in `res/raw` folder.
+
+   - Replace the value of `client-id` with the value of `OAuth Client Key` property which you copied in the step 3 when
+     [configuring the Identity Server](#configuring-the-identity-server).
    - Update the `{HOST_NAME}:{PORT`} with the IS server's `hostname` and `port` respectively
-   
+
    ```json
    {
     "client_id": {client-id},
@@ -68,9 +70,9 @@ This android library currently supports:
     "discovery_uri": "https://{HOST_NAME}:{PORT}/oauth2/oidcdiscovery/.well-known/openid-configuration"
    }
    ```
-   
+
    Example:
-   
+
    ```json
     "client_id": "rs5ww91iychg9JN0DJGLMaxG2gha",
     "redirect_uri": "wso2sample://oauth2",
@@ -86,17 +88,17 @@ This android library currently supports:
     repositories {
         google()
         jcenter()
-        mavenLocal()           
+        mavenLocal()
      }
-   
+
     allProjects {
         google()
         jcenter()
-        mavenLocal()           
+        mavenLocal()
      }
     ```
-   
-5. Run the following commands to build the project. 
+
+5. Run the following commands to build the project.
     - `./gradlew clean assembleRelease`
     - `./gradlew publishToMavenLocal `
 
@@ -104,7 +106,7 @@ This android library currently supports:
 #### Running in an Android Emulator
 1. Create a suitable Android Virtual Device in the Android Studio.
 
-2. If the WSO2 IS is hosted in the local machine, change the domain of the endpoints in the `io.asgardio.android.oidc.sdk.sample/res/raw/oidc_config.json` 
+2. If the WSO2 IS is hosted in the local machine, change the domain of the endpoints in the `io.asgardio.android.oidc.sdk.sample/res/raw/oidc_config.json`
    file to “10.0.2.2”. Refer the documentation on [emulator-networking](https://developer.android.com/studio/run/emulator-networking)
 
 3. By default IS uses a self-signed certificate. If you are using the default pack without
@@ -121,15 +123,14 @@ This android library currently supports:
         ```shell script
         keytool -exportcert -alias wso2carbon -keystore wso2carbon.jks -rfc -file wso2carbon.pem
         ```
-    iii. Import the certificate in the client-truststore.jks file located in <IS_HOME>/repository
-    /resources/security/
+    iii. Import the certificate in the client-truststore.jks file located in `<IS_HOME>/repository/resources/security/`
        ```shell script
       keytool -import -alias wso2is -file wso2carbon.pem -keystore client-truststore.jks
              -storepass wso2carbon
        ```
     iv. Now copy this public certificate (wso2carbon.pem) into the `io.asgardio.android.oidc.sdk.sample/res/raw` folder.
 
-5. Select the Virtual Device to run the application. 
+5. Select the Virtual Device to run the application.
 6. Run the the module `io.asgardio.android.oidc.sdk.sample` on the selected Virtual Device.
 
 
@@ -138,7 +139,7 @@ This android library currently supports:
    [Run your App](https://developer.android.com/training/basics/firstapp/running-app).
 
 2. If the WSO2 IS is hosted in the local machine, change the domain of the endpoints in the `io.asgardio.android.oidc.sdk.sample/res/raw/oidc_config.json`  file and the hostnames specified under `hostname` config
-   in the `<IS_HOME>/repository/conf/deployment.toml` file to the IP Address of local machine. 
+   in the `<IS_HOME>/repository/conf/deployment.toml` file to the IP Address of local machine.
    Make sure that both the Android Device and the local machine is connected to the same WIFI network.
 
 3. Connect the Android Device to the machine through a USB cable.
@@ -146,23 +147,29 @@ This android library currently supports:
 4. Select the Android Device as the Deployment Target.
 
 5. Run the the module `io.asgardio.android.oidc.sdk.sample` on the selected Android Device.
- 
+
 ## Integrating OIDC SDK to your Android application
-### Getting started
-Throughout this section we will refer to the Identity Server installation directory as IS_HOME.
-
-These instructions will guide you on integrating OIDC into your Android application with the Asgardio Android OIDC SDK.
+This section will guide you on integrating OIDC into your Android application with the Asgardio Android OIDC SDK.
 This allows an Android application (i.e. Service Provider) to connect with an IDP using OpenID protocol.
+This guide consist with the following sections.
++ [Introduction](#introduction)
++ [Installing the SDK](#installing-the-sdk)
++ [Login](#login)
++ [Authentication context.](#authentication-context)
++ [Get user details.](#get-user-details)
 
-A sample application is included in 
+### Introduction
+A sample application is included in
 https://github.com/asgardio/asgardio-android-oidc-sdk/tree/master/io.asgardio.android.oidc.sdk.sample
-which we would use for the following section. 
+which we would use for the following section.
 Here, we are using the sample as a reference only, we can follow the same approach to build our own app as well.
 The structure of the sample would be as follows:
 
 ![Sample Structure](https://user-images.githubusercontent.com/15249242/91576045-377b0800-e965-11ea-83b9-83549e77e720.png)
 
-### Configuring the sample
+Throughout this section we will refer to the Identity Server installation directory as IS_HOME.
+
+### Installing the SDK
 1. Add [latest released SDK](https://github.com/asgardio/asgardio-android-oidc-sdk) in the `build.gradle` file of the module `io.asgardio.android.oidc.sdk.sample`.
 
 ```gradle
@@ -172,7 +179,7 @@ dependencies {
    }
 }
 ```
-  
+
 2. Add a redirect scheme in the saample application. You need to add the `appAuthRedirectScheme` in the
    `build.gradle` file of the module `io.asgardio.android.oidc.sdk.sample`.<br/>
     This should be consistent with the `CallBack Url` of the Service Provider that you configured in the
@@ -187,8 +194,8 @@ dependencies {
     ]
     ```
 
-3. Create the `oidc_config.json` file with the following configuration inside the `res/raw` folder of the module 
-   `io.asgardio.android.oidc.sdk.sample`. 
+3. Create the `oidc_config.json` file with the following configuration inside the `res/raw` folder of the module
+   `io.asgardio.android.oidc.sdk.sample`.
 
     ```json
     {
@@ -200,8 +207,8 @@ dependencies {
     ```
 
 ### Login
-1. First, you need to initialize the SDK object in an `Activity` that you are using to log users into your app. 
-   For the purpose of this sample, we will call it `LoginActivity`. 
+1. First, you need to initialize the SDK object in an `Activity` that you are using to log users into your app.
+   For the purpose of this sample, we will call it `LoginActivity`.
 2. We need to create another activity which after successful authentication, the user will be redirected to.
    Let's name it as `UserInfoActivity`.
 
@@ -218,22 +225,22 @@ dependencies {
                        doLogin()
         );
     ```
-       
+
     ```java
     private void doLogin() {
-       
+
           Intent completionIntent = new Intent(this, UserInfoActivity.class);
           Intent cancelIntent = new Intent(this, LoginActivity.class);
           cancelIntent.putExtra("failed", true);
           cancelIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
           PendingIntent successIntent = PendingIntent.getActivity(this, 0, completionIntent, 0);
           PendingIntent failureIntent = PendingIntent.getActivity(this, 0, cancelIntent, 0);
-    
+
           mLoginService.authorize(successIntent, failureIntent, true);
        }
     ```
     - The`doLogin()` method will be called when the `login button` is clicked to initiate authentication with WSO2 Identity Server.
- 
+
     - You need to create `completionIntent` and `cancelIntent` while calling the `authorize` method of `LoginService`.
 
     - You can pass either `true` or `false` for the `callUserInfo` parameter. If `callUserInfo` value is `true`,
@@ -244,22 +251,22 @@ dependencies {
 
 ### Authentication context.
 
-- After successful authentication, `AuthenticationContext` object will be returned in the Intent. 
+- After successful authentication, `AuthenticationContext` object will be returned in the Intent.
   This `AuthenticationContext` object is used to store all the context related to that authentication flow.
 
-- From the `onCreate()` method of the `UserInfoActivity`, get the `AuthenticationContext` object. 
+- From the `onCreate()` method of the `UserInfoActivity`, get the `AuthenticationContext` object.
 
 - Authentication context object has `User`, `OidcDiscovery response`,   `TokenResponse`, and `UserInfoResponse`.
- 
+
 ```java
 @Override
-    protected void create() {  
+    protected void create() {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_info);
         mLoginService = new DefaultLoginService(this);
         mAuthenticationContext = (AuthenticationContext) getIntent().getSerializableExtra("context");
     }
-``` 
+```
 
 
 ### Get user details.
@@ -269,7 +276,7 @@ String userName = mAuthenticationContext.getUser().getUserName();
 Map<String, Object> userAttributes = mAuthenticationContext.getUser().getAttributes();
 ```
 
-# Authentication context information
+# Authentication SPI
 ## Get information related to token response
 
 - To get information related to token response, first you need to get `OAuth2TokenResponse` from
@@ -376,30 +383,18 @@ private void getUserInfo(){
         }
     ```
 
-## Installing the SDK
-Add [latest released SDK](https://github.com/asgardio/asgardio-android-oidc-sdk) in
- your app's `build.gradle` file.
-
-```gradle
-dependencies {
-   dependencies {
-        implementation 'io.asgardio.android.oidc.sdk:io.asgardio.android.oidc.sdk:0.1.0'
-   }
-}
-```
-
-## Contributing
+# Contributing
 Please read [Contributing to the Code Base](http://wso2.github.io/) for details on our code of conduct, and the
  process for submitting pull requests to us.
  
-### Reporting issues
-We encourage you to report issues, improvements, and feature requests creating [git Issues](https://github.com/wso2-extensions/identity-samples-dotnet/issues).
+## Reporting issues
+We encourage you to report issues, improvements, and feature requests creating [git Issues](https://github.com/asgardio/asgardio-android-oidc-sdk/issues).
 
 Important: And please be advised that security issues must be reported to security@wso2.com, not as GitHub issues, 
 in order to reach the proper audience. We strongly advise following the WSO2 Security Vulnerability Reporting Guidelines
  when reporting the security issues.
 
-## License
+# License
 This project is licensed under the Apache License 2.0. See the [LICENSE
 ](LICENSE) file for details.
 
