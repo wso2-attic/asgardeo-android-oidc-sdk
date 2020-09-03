@@ -56,8 +56,8 @@ bintray {
     // Default: true. Whether version should be auto published after an upload
     publish = true
     pkg {
-        repo = 'oidc-android' // the name of the repository  created on Bintray
-        name = 'wso2-oidc-sdk' // the name of the package created inside it
+        repo = 'io.asgardio.android.oidc.sdk' // the name of the repository  created on Bintray
+        name = 'io.asgardio.android.oidc.sdk' // the name of the package created inside it
         version {
             name = this.version
             released = new Date()
