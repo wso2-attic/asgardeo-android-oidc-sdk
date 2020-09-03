@@ -58,6 +58,7 @@ bintray {
     pkg {
         repo = 'io.asgardio.android.oidc.sdk' // the name of the repository  created on Bintray
         name = 'io.asgardio.android.oidc.sdk' // the name of the package created inside it
+        userOrg = 'asgardio'
         version {
             name = this.version
             released = new Date()
