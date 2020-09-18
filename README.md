@@ -46,7 +46,7 @@ sections listed below.
     ![OAuth Client Credentials](https://user-images.githubusercontent.com/15249242/91567068-27155e00-e962-11ea-8eab-b3bdd790bfd4.png)
 
 ### Configuring the sample
-1. Clone this project by running `git clone git@github.com:asgardio/asgardio-android-oidc-sdk.git`.
+1. Clone this project by running `git clone https://github.com/asgardio/asgardio-android-oidc-sdk.git`.
 
 2. Open the cloned project directory via Android Studio.
 
