@@ -18,7 +18,7 @@
 
 apply plugin: 'com.android.application'
 
-version = '0.1.25-SNAPSHOT'
+version = '0.1.25'
 
 android {
     compileSdkVersion 29
