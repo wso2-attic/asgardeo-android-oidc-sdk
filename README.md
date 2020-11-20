@@ -159,18 +159,14 @@ This guide consist with the following sections.
 + [Get user details.](#get-user-details)
 
 ### Introduction
-A sample application is included in
-https://github.com/asgardio/asgardio-android-oidc-sdk/tree/master/io.asgardio.android.oidc.sdk.sample
-which we would use for the following section.
-Here, we are using the sample as a reference only, we can follow the same approach to build our own app as well.
-The structure of the sample would be as follows:
+The structure of a sample Android application would be as follows:
 
-![Sample Structure](https://user-images.githubusercontent.com/15249242/91576045-377b0800-e965-11ea-83b9-83549e77e720.png)
+![Sample Structure](https://user-images.githubusercontent.com/25479743/99792384-09185d80-2b4d-11eb-8fa5-ed194e13b14a.png)
 
 Throughout this section we will refer to the Identity Server installation directory as IS_HOME.
 
 ### Installing the SDK
-1. Add [latest released SDK](https://github.com/asgardio/asgardio-android-oidc-sdk) in the `build.gradle` file of the module `io.asgardio.android.oidc.sdk.sample`.
+1. Add [latest released SDK](https://github.com/asgardio/asgardio-android-oidc-sdk) in the `build.gradle` file of your Android application.
 
 ```gradle
 dependencies {
@@ -180,8 +176,8 @@ dependencies {
 }
 ```
 
-2. Add a redirect scheme in the saample application. You need to add the `appAuthRedirectScheme` in the
-   `build.gradle` file of the module `io.asgardio.android.oidc.sdk.sample`.<br/>
+2. Add a redirect scheme in the Android application. You need to add the `appAuthRedirectScheme` in the
+   `build.gradle` file of your Android application.<br/>
     This should be consistent with the `CallBack Url` of the Service Provider that you configured in the
     WSO2 Identity Server and in the `oidc_config.json` file. Refer the [configuration section](#configuration) for further information.
 
@@ -194,8 +190,7 @@ dependencies {
     ]
     ```
 
-3. Create the `oidc_config.json` file with the following configuration inside the `res/raw` folder of the module
-   `io.asgardio.android.oidc.sdk.sample`.
+3. Create the `oidc_config.json` file with the following configuration inside the `res/raw` folder of your Android application.
 
     ```json
     {
