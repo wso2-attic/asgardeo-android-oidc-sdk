@@ -16,7 +16,40 @@
  * under the License.
  */
 
+package io.asgardeo.android.oidc.sdk.config;
 
-rootProject.name='asgardeo-android-oidc-sdk'
-include ':io.asgardeo.android.oidc.sdk'
-include ':io.asgardeo.android.oidc.sdk.sample'
+import android.net.Uri;
+
+/**
+ * This interface is used to get configurations of an OIDC application.
+ */
+public interface Configuration {
+
+    /**
+     * Returns clientId.
+     *
+     * @return clientId.
+     */
+    String getClientId();
+
+    /**
+     * Returns scope.
+     *
+     * @return scope.
+     */
+    String getScope();
+
+    /**
+     * Returns redirect URI.
+     *
+     * @return redirectURI.
+     */
+    Uri getRedirectUri();
+
+    /**
+     * Returns discovery URI.
+     *
+     * @return discoveryURI.
+     */
+    Uri getDiscoveryUri();
+}

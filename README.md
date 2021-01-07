@@ -1,12 +1,12 @@
-# Asgardio Android OIDC SDK
-[![Build Status](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fwso2.org%2Fjenkins%2Fjob%2Fasgardio%2Fjob%2Fasgardio-android-oidc-sdk%2F&style=flat)](https://wso2.org/jenkins/job/asgardio/job/asgardio-android-oidc-sdk/)
-[![Download](https://api.bintray.com/packages/asgardio/io.asgardio.android.oidc.sdk/io.asgardio.android.oidc.sdk/images/download.svg)](https://bintray.com/asgardio/io.asgardio.android.oidc.sdk/io.asgardio.android.oidc.sdk/_latestVersion)
+# Asgardeo Android OIDC SDK
+[![Build Status](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fwso2.org%2Fjenkins%2Fjob%2Fasgardeo%2Fjob%2Fasgardeo-android-oidc-sdk%2F&style=flat)](https://wso2.org/jenkins/job/asgardeo/job/asgardeo-android-oidc-sdk/)
+[![Download](https://api.bintray.com/packages/asgardeo/io.asgardeo.android.oidc.sdk/io.asgardeo.android.oidc.sdk/images/download.svg)](https://bintray.com/asgardeo/io.asgardeo.android.oidc.sdk/io.asgardeo.android.oidc.sdk/_latestVersion)
 [![Stackoverflow](https://img.shields.io/badge/Ask%20for%20help%20on-Stackoverflow-orange)](https://stackoverflow.com/questions/tagged/wso2is)
 [![Join the chat at https://join.slack.com/t/wso2is/shared_invite/enQtNzk0MTI1OTg5NjM1LTllODZiMTYzMmY0YzljYjdhZGExZWVkZDUxOWVjZDJkZGIzNTE1NDllYWFhM2MyOGFjMDlkYzJjODJhOWQ4YjE](https://img.shields.io/badge/Join%20us%20on-Slack-%23e01563.svg)](https://join.slack.com/t/wso2is/shared_invite/enQtNzk0MTI1OTg5NjM1LTllODZiMTYzMmY0YzljYjdhZGExZWVkZDUxOWVjZDJkZGIzNTE1NDllYWFhM2MyOGFjMDlkYzJjODJhOWQ4YjE)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/wso2/product-is/blob/master/LICENSE)
 [![Twitter](https://img.shields.io/twitter/follow/wso2.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=wso2)
 ---
-Asgardio Android OIDC SDK is a library that can be used to secure any Android application.
+Asgardeo Android OIDC SDK is a library that can be used to secure any Android application.
 This android library currently supports:
 - [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1) using the [PKCE extension](https://tools.ietf.org/html/rfc7636)
 
@@ -19,7 +19,7 @@ This android library currently supports:
 - [License](#license)
 
 ## Getting started
-You can experience the capabilities of Asgardio Android OIDC SDK by following this small guide which contains main
+You can experience the capabilities of Asgardeo Android OIDC SDK by following this small guide which contains main
 sections listed below.
 + [Configuring the Identity Server](#configuring-the-identity-server)
 + [Configuring the sample](#configuring-the-sample)
@@ -48,7 +48,7 @@ sections listed below.
     ![OAuth Client Credentials](https://user-images.githubusercontent.com/15249242/91567068-27155e00-e962-11ea-8eab-b3bdd790bfd4.png)
 
 ### Configuring the sample
-1. Clone this project by running `git clone https://github.com/asgardio/asgardio-android-oidc-sdk.git`.
+1. Clone this project by running `git clone https://github.com/asgardeo/asgardeo-android-oidc-sdk.git`.
 
 2. Open the cloned project directory via Android Studio.
 
@@ -103,7 +103,7 @@ sections listed below.
 #### Running in an Android Emulator
 1. Create a suitable Android Virtual Device in the Android Studio.
 
-2. If the WSO2 IS is hosted in the local machine, change the domain of the endpoints in the `io.asgardio.android.oidc.sdk.sample/res/raw/oidc_config.json`
+2. If the WSO2 IS is hosted in the local machine, change the domain of the endpoints in the `io.asgardeo.android.oidc.sdk.sample/res/raw/oidc_config.json`
    file to “10.0.2.2”. Refer the documentation on [emulator-networking](https://developer.android.com/studio/run/emulator-networking)
 
 3. By default IS uses a self-signed certificate. If you are using the default pack without
@@ -128,17 +128,17 @@ sections listed below.
     keytool -import -alias wso2is -file wso2carbon.pem -keystore client-truststore.jks -storepass wso2carbon
     ```
          
-    iv. Now copy this public certificate (wso2carbon.pem) into the `io.asgardio.android.oidc.sdk.sample/res/raw` folder.
+    iv. Now copy this public certificate (wso2carbon.pem) into the `io.asgardeo.android.oidc.sdk.sample/res/raw` folder.
 
 5. Select the Virtual Device to run the application.
-6. Run the the module `io.asgardio.android.oidc.sdk.sample` on the selected Virtual Device.
+6. Run the the module `io.asgardeo.android.oidc.sdk.sample` on the selected Virtual Device.
 
 
 #### Running in an Android Device
 1. Enable USB Debugging in the Developer Options in the Android Device. Refer documentation on
    [Run your App](https://developer.android.com/training/basics/firstapp/running-app).
 
-2. If the WSO2 IS is hosted in the local machine, change the domain of the endpoints in the `io.asgardio.android.oidc.sdk.sample/res/raw/oidc_config.json`  file and the hostnames specified under `hostname` config
+2. If the WSO2 IS is hosted in the local machine, change the domain of the endpoints in the `io.asgardeo.android.oidc.sdk.sample/res/raw/oidc_config.json`  file and the hostnames specified under `hostname` config
    in the `<IS_HOME>/repository/conf/deployment.toml` file to the IP Address of local machine.
    Make sure that both the Android Device and the local machine is connected to the same WIFI network.
 
@@ -146,10 +146,10 @@ sections listed below.
 
 4. Select the Android Device as the Deployment Target.
 
-5. Run the the module `io.asgardio.android.oidc.sdk.sample` on the selected Android Device.
+5. Run the the module `io.asgardeo.android.oidc.sdk.sample` on the selected Android Device.
 
 ## Integrating OIDC SDK to your Android application
-This section will guide you on integrating OIDC into your Android application with the Asgardio Android OIDC SDK.
+This section will guide you on integrating OIDC into your Android application with the Asgardeo Android OIDC SDK.
 This allows an Android application (i.e. Service Provider) to connect with an IDP using OpenID protocol.
 This guide consist with the following sections.
 + [Introduction](#introduction)
@@ -166,12 +166,12 @@ The structure of a sample Android application would be as follows:
 Throughout this section we will refer to the Identity Server installation directory as IS_HOME.
 
 ### Installing the SDK
-1. Add [latest released SDK](https://github.com/asgardio/asgardio-android-oidc-sdk) in the `build.gradle` file of your Android application.
+1. Add [latest released SDK](https://github.com/asgardeo/asgardeo-android-oidc-sdk) in the `build.gradle` file of your Android application.
 
 ```gradle
 dependencies {
    dependencies {
-        implementation 'io.asgardio.android.oidc.sdk:io.asgardio.android.oidc.sdk:0.1.32'
+        implementation 'io.asgardeo.android.oidc.sdk:io.asgardeo.android.oidc.sdk:0.1.32'
    }
 }
 ```
@@ -389,7 +389,7 @@ Please read [Contributing to the Code Base](http://wso2.github.io/) for details 
  process for submitting pull requests to us.
  
 ## Reporting issues
-We encourage you to report issues, improvements, and feature requests creating [git Issues](https://github.com/asgardio/asgardio-android-oidc-sdk/issues).
+We encourage you to report issues, improvements, and feature requests creating [git Issues](https://github.com/asgardeo/asgardeo-android-oidc-sdk/issues).
 
 Important: And please be advised that security issues must be reported to security@wso2.com, not as GitHub issues, 
 in order to reach the proper audience. We strongly advise following the WSO2 Security Vulnerability Reporting Guidelines
