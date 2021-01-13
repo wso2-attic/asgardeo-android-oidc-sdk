@@ -18,7 +18,7 @@
 
 apply plugin: 'com.android.library'
 
-version = '0.1.33-SNAPSHOT'
+version = '0.1.33'
 group = 'io.asgardeo.android.oidc.sdk'
 
 android {
