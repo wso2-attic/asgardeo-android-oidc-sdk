@@ -29,7 +29,6 @@ public class Constants {
     public static final String BEARER = "Bearer ";
 
     // Constants related to Configuration.
-    public static final String DISCOVERY_ENDPOINT = "/oauth2/oidcdiscovery/.well-known/openid-configuration";
     public static final String DISCOVERY_URI = "discovery_uri";
     public static final String CLIENT_ID = "client_id";
     public static final String AUTHORIZATION_SCOPE = "authorization_scope";

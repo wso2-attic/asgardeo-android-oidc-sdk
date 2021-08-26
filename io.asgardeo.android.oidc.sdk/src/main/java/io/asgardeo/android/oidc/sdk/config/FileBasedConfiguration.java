@@ -146,7 +146,7 @@ public class FileBasedConfiguration implements Configuration {
         mClientId = getRequiredConfigString(Constants.CLIENT_ID);
         mScope = getRequiredConfigString(Constants.AUTHORIZATION_SCOPE);
         mRedirectUri = getRequiredUri(getRequiredConfigString(Constants.REDIRECT_URI));
-        mDiscoveryUri = deriveDiscoveryUri(getRequiredConfigString(Constants.DISCOVERY_URI));
+        mDiscoveryUri = getRequiredUri(getRequiredConfigString(Constants.DISCOVERY_URI));
     }
 
     /**
@@ -199,23 +199,4 @@ public class FileBasedConfiguration implements Configuration {
         }
         return uri;
     }
-
-    /**
-     * Returns discovery URI.
-     *
-     * @param issuerUri Uri.
-     * @return discovery URI.
-     */
-    private Uri deriveDiscoveryUri(String issuerUri) throws ClientException {
-
-        if (issuerUri.contains(Constants.DISCOVERY_ENDPOINT)) {
-            Log.d(LOG_TAG, "Discovery endpoint is " + issuerUri);
-            return getRequiredUri(issuerUri);
-        } else {
-            String derivedUri = issuerUri + Constants.DISCOVERY_ENDPOINT;
-            Log.d(LOG_TAG, "Discovery endpoint is " + derivedUri);
-            return getRequiredUri(derivedUri);
-        }
-    }
-
 }
