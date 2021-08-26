@@ -32,7 +32,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="io.asgardeo.android.oidc.sdk.sample.SplashActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

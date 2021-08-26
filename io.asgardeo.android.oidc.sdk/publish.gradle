@@ -85,5 +85,5 @@ artifacts {
     archives sourcesJar
 }
 
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
