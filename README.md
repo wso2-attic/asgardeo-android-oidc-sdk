@@ -171,7 +171,7 @@ Throughout this section we will refer to the Identity Server installation direct
 ```gradle
 dependencies {
    dependencies {
-        implementation 'io.asgardeo.android.oidc.sdk:io.asgardeo.android.oidc.sdk:0.1.33'
+        implementation 'io.asgardeo.android.oidc.sdk:io.asgardeo.android.oidc.sdk:0.1.34'
    }
 }
 ```
