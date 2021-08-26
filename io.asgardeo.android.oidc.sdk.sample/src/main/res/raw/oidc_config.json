@@ -2,5 +2,5 @@
   "client_id": "bdEQHU0CW8_G1HtgmGQS_hckuwsa",
   "redirect_uri": "wso2sample://oauth2",
   "authorization_scope": "openid",
-  "discovery_uri": "https://localhost:9443/oauth2/oidcdiscovery/.well-known/openid-configuration"
+  "discovery_uri": "https://localhost:9443/oauth2/token/.well-known/openid-configuration"
 }
