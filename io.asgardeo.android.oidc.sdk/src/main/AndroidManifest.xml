@@ -17,7 +17,8 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.asgardeo.android.oidc.sdk" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="io.asgardeo.android.oidc.sdk">
 
 <application>
     <activity android:name="io.asgardeo.android.oidc.sdk.activity.TokenManagementActivity"
@@ -27,8 +28,7 @@
 
     <activity android:name="net.openid.appauth.AuthorizationManagementActivity"
             android:exported="false"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"/>
 
     <activity android:name="net.openid.appauth.RedirectUriReceiverActivity"
             android:exported="true">
