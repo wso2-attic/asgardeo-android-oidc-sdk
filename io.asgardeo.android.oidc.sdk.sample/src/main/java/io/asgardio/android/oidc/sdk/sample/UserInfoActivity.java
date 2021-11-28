@@ -39,8 +39,6 @@ import org.json.JSONException;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -191,15 +189,10 @@ public class UserInfoActivity extends AppCompatActivity {
         OAuth2TokenResponse.IDTokenResponse idTokenResponse = mAuthenticationContext
                 .getOAuth2TokenResponse().getIdTokenResponse();
         if (idTokenResponse != null) {
-            // Get issuer claim from IDToken.
-            Map<String, Object> claims = new HashMap<>();
-            try {
-                claims = idTokenResponse.getClaims();
-            } catch (ParseException e) {
-                Log.e(LOG_TAG, "Error while getting claims from ID token", e);
-            }
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.id_token_details);
 
+            // Get issuer claim from IDToken.
+            Map<String, Object> claims = idTokenResponse.getClaims();
             for (Map.Entry<String, Object> claimEntry : claims.entrySet()) {
 
                 if ("exp" == claimEntry.getKey()) {
@@ -231,9 +224,7 @@ public class UserInfoActivity extends AppCompatActivity {
                     claimValue.setLayoutParams(valueParams);
                     linearLayout.addView(claimValue);
                 }
-
             }
-
         }
     }
 
@@ -252,13 +243,8 @@ public class UserInfoActivity extends AppCompatActivity {
 
         UserInfoResponse userInfoResponse = mAuthenticationContext.getUserInfoResponse();
         if (userInfoResponse != null) {
-            Iterator<String> keys = null;
             try {
-                keys = userInfoResponse.getUserInfoProperties().keys();
-            } catch (JSONException e) {
-                Log.e(LOG_TAG, "Error while reading user properties", e);
-            }
-            try {
+                Iterator<String> keys = userInfoResponse.getUserInfoProperties().keys();
                 while (keys != null && keys.hasNext()) {
                     String claimName = keys.next();
                     String claimValue = (String) userInfoResponse.getUserInfoProperties()
