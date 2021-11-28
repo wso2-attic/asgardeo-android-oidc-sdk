@@ -18,7 +18,7 @@
 
 apply plugin: 'com.android.library'
 
-version = '0.1.34'
+version = '0.1.35'
 group = 'io.asgardeo.android.oidc.sdk'
 
 android {
@@ -59,7 +59,7 @@ dependencies {
     implementation group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '8.19'
 }
 
-apply from: 'publish.gradle'
+//apply from: 'publish.gradle'
 
 // Run this task with `./gradlew increment -PnewVersion=1.0.0` to change the version.
 task incrementVersion {
@@ -71,3 +71,11 @@ task incrementVersion {
         buildFile.setText(s)
     }
 }
+
+ext {
+    PUBLISH_GROUP_ID = this.group
+    PUBLISH_VERSION = this.version
+    PUBLISH_ARTIFACT_ID = 'asgardeo-android-oidc-sdk'
+}
+
+apply from: "${rootDir}/publish-module.gradle"
