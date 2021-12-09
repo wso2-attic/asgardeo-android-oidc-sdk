@@ -43,7 +43,6 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-
 }
 
 dependencies {
@@ -58,7 +57,7 @@ dependencies {
 }
 
 android.defaultConfig.manifestPlaceholders = [
-        'appAuthRedirectScheme': 'wso2sample'
+    'appAuthRedirectScheme': 'wso2sample'
 ]
 
 // Run this task with `./gradlew increment -PnewVersion=1.0.0` to change the version.
