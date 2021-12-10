@@ -43,7 +43,6 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-
 }
 
 dependencies {
@@ -59,11 +58,8 @@ dependencies {
     implementation group: 'com.nimbusds', name: 'nimbus-jose-jwt', version: '8.19'
 }
 
-apply from: 'publish.gradle'
-
 // Run this task with `./gradlew increment -PnewVersion=1.0.0` to change the version.
 task incrementVersion {
-
     if(project.hasProperty('newVersion')) {
         println 'Set Project to new Version ' + newVersion
         String s = buildFile.getText().replaceFirst("version = '$version'", "version = '" +
@@ -71,3 +67,9 @@ task incrementVersion {
         buildFile.setText(s)
     }
 }
+
+ext['publishGroupId'] = this.group
+ext['publishVersion'] = this.version
+ext['publishArtifactId'] = 'io.asgardeo.android.oidc.sdk'
+
+apply from: "${rootDir}/publish.gradle"
