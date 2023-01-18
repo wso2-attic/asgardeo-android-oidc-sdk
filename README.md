@@ -58,7 +58,7 @@ sections listed below.
 
 #### Configuring the Asgardeo
 1. Register to [Asgardeo](https://wso2.com/asgardeo) and create an organization if you don't already have one.
-2. [Register a Mobile Application in Asgardeo](https://wso2.com/asgardeo/docs/guides/applications/register-mobile-app/#register-the-app) to obtain necessory keys to integrate your application with Asgardeo. You will obtain a `client_ID` from Asgardeo for your application which will need to embed later in your application for the integration. 
+2. [Register a Mobile Application in Asgardeo](https://wso2.com/asgardeo/docs/guides/applications/register-mobile-app/#register-the-app) to obtain necessary keys to integrate your application with Asgardeo. You will obtain a `client_ID` from Asgardeo for your application which will need to embed later in your application for the integration. 
 
 ### Configuring the sample
 1. Clone this project by running `git clone https://github.com/asgardeo/asgardeo-android-oidc-sdk.git`.
