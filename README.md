@@ -11,6 +11,7 @@ This android library currently supports:
 - [OAuth 2.0 Authorization Code Flow](https://tools.ietf.org/html/rfc6749#section-4.1) using the [PKCE extension](https://tools.ietf.org/html/rfc7636)
 
 ## Table of Contents
+- [Prerequisite](#prerequisite)
 - [Getting started](#getting-started)
 - [Integrating OIDC SDK to your Android application](#integrating-oidc-sdk-to-your-android-application)
 - [Authentication SPI](#authentication-spi)
@@ -18,16 +19,24 @@ This android library currently supports:
   * [Reporting issues](#reporting-issues)
 - [License](#license)
 
+## Prerequisite
+Install Android SDK Platform 29 or below.
+https://developer.android.com/studio/releases/platforms#10
+
 ## Getting started
 You can experience the capabilities of Asgardeo Android OIDC SDK by following this small guide which contains main
 sections listed below.
-+ [Configuring the Identity Server](#configuring-the-identity-server)
++ [Configuring the Server](#configuring-the-server)
+  - [Configuring the Identity Server](#configuring-the-identity-server)
+  - [Configuring the Asgardeo](#configuring-the-asgardeo)
 + [Configuring the sample](#configuring-the-sample)
 + [Running the sample](#running-the-sample)
   - [Running in an Android Emulator](#running-in-an-android-emulator)
   - [Running in an Android Device](#running-in-an-android-device)
 
-### Configuring the Identity Server
+### Configuring the Server
+
+#### Configuring the Identity Server
 1. Start the WSO2 IS.
 2. Access WSO2 IS management console from https://localhost:9443/carbon/ and create a service provider.
    ![Management Console](https://user-images.githubusercontent.com/15249242/91068131-6fc2d380-e651-11ea-9d0a-d58c825bbb68.png)
@@ -46,6 +55,10 @@ sections listed below.
     `Inbound Authentication Configuration` section and click the `OAuth/OpenID Connect Configuration` section. Copy the
     value of  `OAuth Client Key` shown here.
     ![OAuth Client Credentials](https://user-images.githubusercontent.com/15249242/91567068-27155e00-e962-11ea-8eab-b3bdd790bfd4.png)
+
+#### Configuring the Asgardeo
+1. Register to [Asgardeo](https://wso2.com/asgardeo) and create an organization if you don't already have one.
+2. [Register a Mobile Application in Asgardeo](https://wso2.com/asgardeo/docs/guides/applications/register-mobile-app/#register-the-app) to obtain necessary keys to integrate your application with Asgardeo. You will obtain a `client_ID` from Asgardeo for your application which will need to embed later in your application for the integration. 
 
 ### Configuring the sample
 1. Clone this project by running `git clone https://github.com/asgardeo/asgardeo-android-oidc-sdk.git`.
@@ -170,9 +183,7 @@ Throughout this section we will refer to the Identity Server installation direct
 
 ```gradle
 dependencies {
-   dependencies {
-        implementation 'io.asgardeo.android.oidc.sdk:io.asgardeo.android.oidc.sdk:0.1.34'
-   }
+    implementation 'io.asgardeo.android.oidc.sdk:io.asgardeo.android.oidc.sdk:0.1.34'
 }
 ```
 
