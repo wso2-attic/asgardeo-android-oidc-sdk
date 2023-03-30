@@ -1,7 +1,7 @@
 # [DEPRECATED] Asgardeo Android OIDC SDK
 
 ## :warning: Warning!
-### Android SDK is no longer encoraged and enriched by Asgardeo and may not work with the latest versions.
+### Android SDK is no longer encouraged and enriched by Asgardeo and may not work with the latest versions.
 ### You can implement login using [Authorization Code flow with PKCE](https://wso2.com/asgardeo/docs/guides/authentication/oidc/implement-auth-code-with-pkce/#prerequisites) with Asgardeo using OIDC standards.
 ---
 [![Build Status](https://img.shields.io/jenkins/build?jobUrl=https%3A%2F%2Fwso2.org%2Fjenkins%2Fjob%2Fasgardeo%2Fjob%2Fasgardeo-android-oidc-sdk%2F&style=flat)](https://wso2.org/jenkins/job/asgardeo/job/asgardeo-android-oidc-sdk/)
